@@ -108,7 +108,7 @@ const App: React.FC = () => {
             case 'press':
                 return <PressPage />;
             case 'help':
-                return <HelpCenterPage />;
+                return <HelpCenterPage onNavigate={navigateTo} />;
             case 'howtobuy':
                 return <HowToBuyPage />;
             case 'shipping':

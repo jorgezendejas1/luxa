@@ -1,7 +1,19 @@
 
 import React, { useState } from 'react';
+import { Page } from '../types';
 
-const FaqItem: React.FC<{ question: string, answer: string }> = ({ question, answer }) => {
+// Define explicit types for better type safety and code clarity
+interface Faq {
+    question: string;
+    answer: React.ReactNode;
+}
+
+interface FaqCategories {
+    [category: string]: Faq[];
+}
+
+
+const FaqItem: React.FC<Faq> = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -9,6 +21,7 @@ const FaqItem: React.FC<{ question: string, answer: string }> = ({ question, ans
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex justify-between items-center w-full py-5 text-left"
+                aria-expanded={isOpen}
             >
                 <span className="font-semibold text-lg text-gray-800">{question}</span>
                 <svg
@@ -17,21 +30,28 @@ const FaqItem: React.FC<{ question: string, answer: string }> = ({ question, ans
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
                 >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </button>
             {isOpen && (
-                <p className="pb-5 pr-4 text-gray-600 animate-fade-in">
+                // Use a <div> to safely render React.ReactNode, preventing nesting issues
+                <div className="pb-5 pr-4 text-gray-600 animate-fade-in">
                     {answer}
-                </p>
+                </div>
             )}
         </div>
     );
 };
 
-const HelpCenterPage: React.FC = () => {
-    const faqs = {
+interface HelpCenterPageProps {
+    onNavigate: (page: Page) => void;
+}
+
+const HelpCenterPage: React.FC<HelpCenterPageProps> = ({ onNavigate }) => {
+    // Apply the defined type to the faqs data
+    const faqs: FaqCategories = {
         "Pedidos y Pagos": [
             {
                 question: "¿Qué métodos de pago aceptan?",
@@ -55,7 +75,17 @@ const HelpCenterPage: React.FC = () => {
         "Devoluciones": [
             {
                 question: "¿Puedo devolver un producto?",
-                answer: "Sí, tienes 15 días a partir de la fecha de recepción para solicitar una devolución. El producto debe estar en su estado original, sin usar y con todas sus etiquetas. Consulta nuestra Política de Devoluciones para más detalles."
+                answer: (
+                    <>
+                        Sí, tienes 15 días a partir de la fecha de recepción para solicitar una devolución. 
+                        El producto debe estar en su estado original, sin usar y con todas sus etiquetas. 
+                        Consulta nuestra{' '}
+                        <button onClick={() => onNavigate('returns')} className="text-pink-600 underline hover:text-pink-800 font-semibold">
+                            Política de Devoluciones
+                        </button>
+                        {' '}para más detalles.
+                    </>
+                )
             }
         ]
     };
@@ -66,12 +96,12 @@ const HelpCenterPage: React.FC = () => {
                 <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-12">Centro de Ayuda</h1>
                 <div className="max-w-3xl mx-auto">
                     {Object.entries(faqs).map(([category, items]) => (
-                        <div key={category} className="mb-10">
-                            <h2 className="text-2xl font-bold text-pink-600 mb-4">{category}</h2>
+                        <section key={category} className="mb-10" aria-labelledby={category.replace(/\s+/g, '-')}>
+                            <h2 id={category.replace(/\s+/g, '-')} className="text-2xl font-bold text-pink-600 mb-4">{category}</h2>
                             {items.map((faq, index) => (
                                 <FaqItem key={index} {...faq} />
                             ))}
-                        </div>
+                        </section>
                     ))}
                 </div>
             </div>
