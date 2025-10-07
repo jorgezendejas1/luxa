@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Product, Page } from '../types';
 import { useCart } from '../context/CartContext';
+import { useCurrency } from '../context/CurrencyContext';
 import { products } from '../data/products';
 import ProductCard from '../components/ProductCard';
 import Breadcrumb from '../components/Breadcrumb';
@@ -36,6 +37,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
     const [mainImage, setMainImage] = useState(product.images[0]);
     const [quantity, setQuantity] = useState(1);
     const { addToCart } = useCart();
+    const { convertPrice } = useCurrency();
     
     const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
 
@@ -72,7 +74,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {/* Image Gallery */}
                 <div>
-                    <img src={mainImage} alt={product.name} className="w-full h-auto max-h-[550px] object-cover rounded-lg shadow-lg mb-4" />
+                    <img src={mainImage} alt={product.name} className="w-full h-auto max-h-[550px] object-cover rounded-lg shadow-lg mb-4" loading="lazy" />
                     <div className="flex space-x-2">
                         {product.images.map((img, index) => (
                             <img
@@ -81,6 +83,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
                                 alt={`${product.name} ${index + 1}`}
                                 onClick={() => setMainImage(img)}
                                 className={`w-20 h-20 object-cover rounded-md cursor-pointer border-2 ${mainImage === img ? 'border-pink-500' : 'border-transparent'}`}
+                                loading="lazy"
                             />
                         ))}
                     </div>
@@ -98,11 +101,11 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
                     <div className="flex items-baseline my-4">
                         {product.discountPrice ? (
                              <>
-                                <p className="text-3xl font-bold text-red-500">${product.discountPrice.toLocaleString('es-MX')} MXN</p>
-                                <p className="text-xl text-gray-500 line-through ml-3">${product.price.toLocaleString('es-MX')} MXN</p>
+                                <p className="text-3xl font-bold text-red-500">{convertPrice(product.discountPrice)}</p>
+                                <p className="text-xl text-gray-500 line-through ml-3">{convertPrice(product.price)}</p>
                             </>
                         ) : (
-                             <p className="text-3xl font-bold text-gray-800">${product.price.toLocaleString('es-MX')} MXN</p>
+                             <p className="text-3xl font-bold text-gray-800">{convertPrice(product.price)}</p>
                         )}
                     </div>
                     <p className="text-gray-600 leading-relaxed">{product.description}</p>

@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
+import { useCurrency } from '../context/CurrencyContext';
 import { Order } from '../types';
 
 interface CheckoutPageProps {
@@ -57,6 +58,7 @@ const getValidationErrors = (
 
 const CheckoutPage: React.FC<CheckoutPageProps> = ({ onPlaceOrder }) => {
   const { cartItems, clearCart } = useCart();
+  const { convertPrice } = useCurrency();
   const [shippingInfo, setShippingInfo] = useState({
     name: '', address: '', city: '', state: 'CDMX', zip: '', phone: ''
   });
@@ -213,13 +215,13 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ onPlaceOrder }) => {
           {cartItems.map(item => (
             <div key={item.id} className="flex justify-between items-center text-sm mb-2">
                 <span className="truncate pr-2">{item.name} x {item.quantity}</span>
-                <span className="font-medium whitespace-nowrap">${((item.discountPrice || item.price) * item.quantity).toLocaleString('es-MX')}</span>
+                <span className="font-medium whitespace-nowrap">{convertPrice((item.discountPrice || item.price) * item.quantity)}</span>
             </div>
           ))}
           <div className="border-t mt-4 pt-4 space-y-2">
-            <div className="flex justify-between"><span>Subtotal</span><span>${subtotal.toLocaleString('es-MX')}</span></div>
-            <div className="flex justify-between"><span>Envío</span><span>{shippingCost === 0 ? 'Gratis' : `$${shippingCost.toLocaleString('es-MX')}`}</span></div>
-            <div className="flex justify-between font-bold text-lg"><span>Total (IVA Incluido)</span><span>${total.toLocaleString('es-MX')}</span></div>
+            <div className="flex justify-between"><span>Subtotal</span><span>{convertPrice(subtotal)}</span></div>
+            <div className="flex justify-between"><span>Envío</span><span>{shippingCost === 0 ? 'Gratis' : convertPrice(shippingCost)}</span></div>
+            <div className="flex justify-between font-bold text-lg"><span>Total (IVA Incluido)</span><span>{convertPrice(total)}</span></div>
           </div>
            <button type="submit" className="w-full bg-black text-white font-bold py-3 mt-6 rounded-md hover:bg-gray-800 transition-colors">
               Confirmar Pedido

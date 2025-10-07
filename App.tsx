@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
+import { CurrencyProvider } from './context/CurrencyContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -42,6 +43,45 @@ const App: React.FC = () => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    useEffect(() => {
+        const getTitle = () => {
+            switch (currentPage) {
+                case 'home':
+                    return 'LUXA | Moda Premium en México';
+                case 'category':
+                    const title = searchQuery ? `Resultados para "${searchQuery}"` : selectedCategory === 'all' ? 'Todos los productos' : selectedCategory;
+                    return `LUXA | ${title}`;
+                case 'product':
+                    return selectedProduct ? `LUXA | ${selectedProduct.name}` : 'LUXA';
+                case 'cart':
+                    return 'LUXA | Carrito de Compras';
+                case 'checkout':
+                    return 'LUXA | Finalizar Compra';
+                case 'confirmation':
+                    return 'LUXA | Confirmación de Pedido';
+                case 'about':
+                    return 'LUXA | Nuestra Historia';
+                case 'careers':
+                    return 'LUXA | Carreras';
+                case 'press':
+                    return 'LUXA | Prensa';
+                case 'help':
+                    return 'LUXA | Centro de Ayuda';
+                case 'howtobuy':
+                    return 'LUXA | Cómo Comprar';
+                case 'shipping':
+                    return 'LUXA | Envíos y Entregas';
+                case 'returns':
+                    return 'LUXA | Política de Devoluciones';
+                case 'wishlist':
+                    return 'LUXA | Mi Wishlist';
+                default:
+                    return 'LUXA';
+            }
+        };
+        document.title = getTitle();
+    }, [currentPage, selectedProduct, selectedCategory, searchQuery]);
 
     const scrollToTop = () => {
         window.scrollTo({
@@ -133,18 +173,20 @@ const App: React.FC = () => {
     };
 
     return (
-        <CartProvider>
-            <FavoritesProvider>
-                <div className="flex flex-col min-h-screen font-sans">
-                    <Header onNavigate={navigateTo} onSelectCategory={handleSelectCategory} onSearch={handleSearch} />
-                    <main className="flex-grow animate-fade-in" key={currentPage}>
-                        {renderPage()}
-                    </main>
-                    <Footer onNavigate={navigateTo} />
-                    <BackToTopButton isVisible={showBackToTop} onClick={scrollToTop} />
-                </div>
-            </FavoritesProvider>
-        </CartProvider>
+        <CurrencyProvider>
+            <CartProvider>
+                <FavoritesProvider>
+                    <div className="flex flex-col min-h-screen font-sans">
+                        <Header onNavigate={navigateTo} onSelectCategory={handleSelectCategory} onSearch={handleSearch} />
+                        <main className="flex-grow animate-fade-in" key={currentPage}>
+                            {renderPage()}
+                        </main>
+                        <Footer onNavigate={navigateTo} />
+                        <BackToTopButton isVisible={showBackToTop} onClick={scrollToTop} />
+                    </div>
+                </FavoritesProvider>
+            </CartProvider>
+        </CurrencyProvider>
     );
 };
 

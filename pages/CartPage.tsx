@@ -1,5 +1,7 @@
+
 import React, { useState, useMemo } from 'react';
 import { useCart } from '../context/CartContext';
+import { useCurrency } from '../context/CurrencyContext';
 import { Page } from '../types';
 import ConfirmationDialog from '../components/ConfirmationDialog';
 
@@ -15,6 +17,7 @@ const TrashIcon = () => (
 
 const CartPage: React.FC<CartPageProps> = ({ onNavigate }) => {
   const { cartItems, updateQuantity, removeFromCart, clearCart } = useCart();
+  const { convertPrice, currency } = useCurrency();
   const [coupon, setCoupon] = useState('');
   const [discount, setDiscount] = useState(0);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -36,8 +39,8 @@ const CartPage: React.FC<CartPageProps> = ({ onNavigate }) => {
     setShowConfirm(false);
   };
 
-  const shippingCost = subtotal > 999 ? 0 : 150;
-  const total = subtotal * (1 - discount) + shippingCost;
+  const shippingCostMxn = subtotal > 999 ? 0 : 150;
+  const totalMxn = subtotal * (1 - discount) + shippingCostMxn;
   
   if (cartItems.length === 0) {
     return (
@@ -71,11 +74,11 @@ const CartPage: React.FC<CartPageProps> = ({ onNavigate }) => {
               <div className="bg-white rounded-lg shadow-md">
                   {cartItems.map(item => (
                       <div key={item.id} className="flex items-center p-4 border-b last:border-b-0">
-                          <img src={item.images[0]} alt={item.name} className="w-24 h-24 object-cover rounded-md" />
+                          <img src={item.images[0]} alt={item.name} className="w-24 h-24 object-cover rounded-md" loading="lazy" />
                           <div className="flex-grow ml-4">
                               <h2 className="font-semibold">{item.name}</h2>
                               <p className="text-sm text-gray-500">{item.category}</p>
-                              <p className="font-bold mt-1">${(item.discountPrice || item.price).toLocaleString('es-MX')} MXN</p>
+                              <p className="font-bold mt-1">{convertPrice(item.discountPrice || item.price)}</p>
                           </div>
                           <div className="flex items-center space-x-4">
                               <input
@@ -100,23 +103,23 @@ const CartPage: React.FC<CartPageProps> = ({ onNavigate }) => {
                   <div className="space-y-2">
                       <div className="flex justify-between">
                           <span>Subtotal</span>
-                          <span>${subtotal.toLocaleString('es-MX')} MXN</span>
+                          <span>{convertPrice(subtotal)}</span>
                       </div>
                        <div className="flex justify-between">
                           <span>Envío</span>
-                          <span>{shippingCost === 0 ? 'Gratis' : `$${shippingCost.toLocaleString('es-MX')} MXN`}</span>
+                          <span>{shippingCostMxn === 0 ? 'Gratis' : convertPrice(shippingCostMxn)}</span>
                       </div>
                       {discount > 0 && (
                           <div className="flex justify-between text-green-600">
                               <span>Descuento (10%)</span>
-                              <span>-${(subtotal * discount).toLocaleString('es-MX')} MXN</span>
+                              <span>-{convertPrice(subtotal * discount)}</span>
                           </div>
                       )}
                   </div>
                   <div className="mt-4 pt-4 border-t">
                       <div className="flex justify-between font-bold text-lg">
                           <span>Total</span>
-                          <span>${total.toLocaleString('es-MX')} MXN</span>
+                          <span>{convertPrice(totalMxn)}</span>
                       </div>
                   </div>
 

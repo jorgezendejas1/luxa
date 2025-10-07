@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { Order, Page } from '../types';
+import { useCurrency } from '../context/CurrencyContext';
 
 interface ConfirmationPageProps {
   order: Order;
@@ -7,6 +9,7 @@ interface ConfirmationPageProps {
 }
 
 const ConfirmationPage: React.FC<ConfirmationPageProps> = ({ order, onNavigate }) => {
+  const { convertPrice } = useCurrency();
 
   const handleMercadoPagoClick = () => {
     // In a real application, you would generate a specific payment link.
@@ -26,7 +29,7 @@ const ConfirmationPage: React.FC<ConfirmationPageProps> = ({ order, onNavigate }
         <div className="text-left bg-gray-50 p-6 rounded-lg border my-8">
             <h2 className="font-bold text-lg mb-4">Resumen del Pedido</h2>
             <p className="mb-2"><strong>Número de Pedido:</strong> {order.orderId}</p>
-            <p className="mb-2"><strong>Total:</strong> <span className="font-semibold">${order.total.toLocaleString('es-MX')} MXN</span></p>
+            <p className="mb-2"><strong>Total:</strong> <span className="font-semibold">{convertPrice(order.total)}</span></p>
             <p className="mb-2"><strong>Dirección de Envío:</strong> {order.shippingAddress.address}, {order.shippingAddress.city}, {order.shippingAddress.state}, {order.shippingAddress.zip}</p>
             <p><strong>Método de Pago:</strong> {order.paymentMethod === 'card' ? 'Tarjeta' : order.paymentMethod === 'oxxo' ? 'OXXO' : 'Mercado Pago'}</p>
             {order.paymentMethod === 'oxxo' && <p className="mt-4 p-3 bg-yellow-100 border border-yellow-300 rounded-md">Referencia de pago OXXO simulada: <strong>9876-5432-1098-7654</strong></p>}

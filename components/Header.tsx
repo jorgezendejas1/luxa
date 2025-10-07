@@ -1,7 +1,9 @@
+
 import React, { useState } from 'react';
 import { Page } from '../types';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
+import { useCurrency } from '../context/CurrencyContext';
 
 interface HeaderProps {
     onNavigate: (page: Page) => void;
@@ -44,6 +46,23 @@ const CloseIcon = () => (
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
     </svg>
 );
+
+const CurrencyConverter: React.FC = () => {
+    const { currency, setCurrency } = useCurrency();
+    
+    return (
+        <select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value as 'MXN' | 'USD')}
+            className="text-sm font-semibold text-gray-600 bg-transparent border-none focus:ring-0 cursor-pointer"
+            aria-label="Select currency"
+        >
+            <option value="MXN">MXN</option>
+            <option value="USD">USD</option>
+        </select>
+    );
+};
+
 
 const Header: React.FC<HeaderProps> = ({ onNavigate, onSelectCategory, onSearch }) => {
     const { cartCount } = useCart();
@@ -101,6 +120,8 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onSelectCategory, onSearch 
 
                     {/* Right side: Icons */}
                     <div className="flex items-center space-x-4">
+                        <CurrencyConverter />
+                        <div className="h-6 w-px bg-gray-300"></div>
                         <button className="text-gray-600 hover:text-pink-500"><UserIcon /></button>
                         <button onClick={() => onNavigate('wishlist')} className="relative text-gray-600 hover:text-pink-500">
                             <HeartIcon />

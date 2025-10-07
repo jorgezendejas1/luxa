@@ -22,7 +22,7 @@ const PressPage: React.FC = () => {
     return (
         <div className="bg-white">
             <div className="relative h-64 md:h-80 bg-gray-900">
-                <img src="https://raw.githubusercontent.com/jorgezendejas1/luxa/main/img/press_1.jpg" alt="Prensa y medios" className="w-full h-full object-cover opacity-50"/>
+                <img src="https://raw.githubusercontent.com/jorgezendejas1/luxa/main/img/press_1.jpg" alt="Prensa y medios" className="w-full h-full object-cover opacity-50" loading="lazy"/>
                 <div className="absolute inset-0 flex items-center justify-center">
                     <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-wider text-center">Prensa</h1>
                 </div>

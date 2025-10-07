@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFavorites } from '../context/FavoritesContext';
 import { useCart } from '../context/CartContext';
+import { useCurrency } from '../context/CurrencyContext';
 import { products } from '../data/products';
 import { Product, Page } from '../types';
 
@@ -18,6 +19,7 @@ interface WishlistPageProps {
 const WishlistPage: React.FC<WishlistPageProps> = ({ onSelectProduct, onNavigate }) => {
     const { favorites, toggleFavorite } = useFavorites();
     const { addToCart } = useCart();
+    const { convertPrice } = useCurrency();
     const favoritedProducts = products.filter(product => favorites.includes(product.id));
 
     const handleAddToCart = (product: Product) => {
@@ -51,18 +53,18 @@ const WishlistPage: React.FC<WishlistPageProps> = ({ onSelectProduct, onNavigate
                             <CloseIcon />
                         </button>
                         <div onClick={() => onSelectProduct(product)} className="cursor-pointer overflow-hidden">
-                            <img src={product.images[0]} alt={product.name} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"/>
+                            <img src={product.images[0]} alt={product.name} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
                         </div>
                         <div className="p-4 flex flex-col flex-grow">
                             <h3 className="text-sm font-semibold text-gray-700 truncate flex-grow cursor-pointer" onClick={() => onSelectProduct(product)}>{product.name}</h3>
                             <div className="flex items-baseline mt-2 mb-4">
                                 {product.discountPrice ? (
                                     <>
-                                        <p className="text-lg font-bold text-red-500">${product.discountPrice.toLocaleString('es-MX')} MXN</p>
-                                        <p className="text-sm text-gray-500 line-through ml-2">${product.price.toLocaleString('es-MX')} MXN</p>
+                                        <p className="text-lg font-bold text-red-500">{convertPrice(product.discountPrice)}</p>
+                                        <p className="text-sm text-gray-500 line-through ml-2">{convertPrice(product.price)}</p>
                                     </>
                                 ) : (
-                                    <p className="text-lg font-bold text-gray-800">${product.price.toLocaleString('es-MX')} MXN</p>
+                                    <p className="text-lg font-bold text-gray-800">{convertPrice(product.price)}</p>
                                 )}
                             </div>
                             <button 

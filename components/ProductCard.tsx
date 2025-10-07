@@ -2,6 +2,7 @@
 import React from 'react';
 import { Product } from '../types';
 import { useFavorites } from '../context/FavoritesContext';
+import { useCurrency } from '../context/CurrencyContext';
 
 interface ProductCardProps {
     product: Product;
@@ -22,6 +23,7 @@ const HeartIconOutline = () => (
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProduct }) => {
     const { toggleFavorite, isFavorite } = useFavorites();
+    const { convertPrice } = useCurrency();
     const isFav = isFavorite(product.id);
     
     const handleFavoriteClick = (e: React.MouseEvent) => {
@@ -39,6 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProduct }) =
                     src={product.images[0]} 
                     alt={product.name} 
                     className="w-full h-64 md:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
                 />
                 {product.discountPrice && (
                     <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">OFERTA</span>
@@ -55,11 +58,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProduct }) =
                 <div className="flex items-baseline mt-2">
                     {product.discountPrice ? (
                         <>
-                            <p className="text-lg font-bold text-red-500">${product.discountPrice.toLocaleString('es-MX')} MXN</p>
-                            <p className="text-sm text-gray-500 line-through ml-2">${product.price.toLocaleString('es-MX')} MXN</p>
+                            <p className="text-lg font-bold text-red-500">{convertPrice(product.discountPrice)}</p>
+                            <p className="text-sm text-gray-500 line-through ml-2">{convertPrice(product.price)}</p>
                         </>
                     ) : (
-                        <p className="text-lg font-bold text-gray-800">${product.price.toLocaleString('es-MX')} MXN</p>
+                        <p className="text-lg font-bold text-gray-800">{convertPrice(product.price)}</p>
                     )}
                 </div>
             </div>
