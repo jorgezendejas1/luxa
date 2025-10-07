@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
 import Header from './components/Header';
@@ -17,6 +17,8 @@ import HelpCenterPage from './pages/HelpCenterPage';
 import HowToBuyPage from './pages/HowToBuyPage';
 import ShippingPage from './pages/ShippingPage';
 import ReturnsPage from './pages/ReturnsPage';
+import WishlistPage from './pages/WishlistPage';
+import BackToTopButton from './components/BackToTopButton';
 import { products } from './data/products';
 import { Product, Page, Order } from './types';
 
@@ -26,10 +28,34 @@ const App: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
     const [searchQuery, setSearchQuery] = useState('');
     const [lastOrder, setLastOrder] = useState<Order | null>(null);
+    const [showBackToTop, setShowBackToTop] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 300) {
+                setShowBackToTop(true);
+            } else {
+                setShowBackToTop(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
 
     const navigateTo = (page: Page) => {
         setCurrentPage(page);
-        window.scrollTo(0, 0);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     };
 
     const handleSelectProduct = (product: Product) => {
@@ -89,6 +115,8 @@ const App: React.FC = () => {
                 return <ShippingPage />;
             case 'returns':
                 return <ReturnsPage />;
+            case 'wishlist':
+                return <WishlistPage onSelectProduct={handleSelectProduct} onNavigate={navigateTo} />;
             default:
                 return <HomePage onSelectProduct={handleSelectProduct} onSelectCategory={handleSelectCategory} />;
         }
@@ -99,10 +127,11 @@ const App: React.FC = () => {
             <FavoritesProvider>
                 <div className="flex flex-col min-h-screen font-sans">
                     <Header onNavigate={navigateTo} onSelectCategory={handleSelectCategory} onSearch={handleSearch} />
-                    <main className="flex-grow">
+                    <main className="flex-grow animate-fade-in" key={currentPage}>
                         {renderPage()}
                     </main>
                     <Footer onNavigate={navigateTo} />
+                    <BackToTopButton isVisible={showBackToTop} onClick={scrollToTop} />
                 </div>
             </FavoritesProvider>
         </CartProvider>

@@ -13,6 +13,9 @@ export const products: Product[] = [
     rating: 4.9,
     reviews: [{ id: 1, author: "Mariana G.", rating: 5, comment: "¡Es hermosa y le cabe todo! La uso para la oficina y es perfecta." }],
     stock: 15,
+    brand: "Michael Kors",
+    colors: ["Azul", "Blanco"],
+    sizes: ["Mediana"],
   },
   {
     id: 2,
@@ -24,6 +27,9 @@ export const products: Product[] = [
     rating: 5.0,
     reviews: [{ id: 1, author: "Regina M.", rating: 5, comment: "Absolutamente espectacular. La calidad es increíble." }],
     stock: 10,
+    brand: "Tory Burch",
+    colors: ["Blanco"],
+    sizes: ["Pequeña"],
   },
   {
     id: 3,
@@ -35,6 +41,9 @@ export const products: Product[] = [
     rating: 4.8,
     reviews: [{ id: 1, author: "Sofía L.", rating: 5, comment: "La piel es de una calidad increíble, muy suave." }],
     stock: 8,
+    brand: "Tory Burch",
+    colors: ["Canela", "Café"],
+    sizes: ["Grande"],
   },
   {
     id: 4,
@@ -46,6 +55,9 @@ export const products: Product[] = [
     rating: 4.9,
     reviews: [],
     stock: 12,
+    brand: "Tory Burch",
+    colors: ["Negro"],
+    sizes: ["Grande"],
   },
   {
     id: 5,
@@ -57,6 +69,9 @@ export const products: Product[] = [
     rating: 4.7,
     reviews: [{ id: 1, author: "Valeria R.", rating: 5, comment: "El tamaño es ideal, ni muy grande ni muy pequeña." }],
     stock: 14,
+    brand: "Tory Burch",
+    colors: ["Beige"],
+    sizes: ["Mediana"],
   },
   {
     id: 6,
@@ -68,6 +83,9 @@ export const products: Product[] = [
     rating: 4.8,
     reviews: [],
     stock: 20,
+    brand: "Zadig & Voltaire",
+    colors: ["Negro"],
+    sizes: ["Pequeña"],
   },
   {
     id: 7,
@@ -79,6 +97,9 @@ export const products: Product[] = [
     rating: 4.9,
     reviews: [],
     stock: 18,
+    brand: "Coach",
+    colors: ["Blanco", "Café"],
+    sizes: ["Mediana"],
   },
   // Tenis
   {
@@ -91,6 +112,9 @@ export const products: Product[] = [
     rating: 4.8,
     reviews: [{ id: 1, author: "Carlos M.", rating: 5, comment: "Son súper cómodos y se ven de lujo." }],
     stock: 25,
+    brand: "Lacoste",
+    colors: ["Blanco", "Verde"],
+    sizes: ["25 MX", "26 MX", "27 MX", "28 MX"],
   },
   {
     id: 9,
@@ -102,6 +126,9 @@ export const products: Product[] = [
     rating: 5.0,
     reviews: [{ id: 1, author: "Elena F.", rating: 5, comment: "Parece que flotas al correr. Los mejores que he tenido." }],
     stock: 15,
+    brand: "Hoka",
+    colors: ["Blanco"],
+    sizes: ["23 MX", "24 MX", "25 MX"],
   },
   {
     id: 10,
@@ -114,6 +141,9 @@ export const products: Product[] = [
     rating: 4.7,
     reviews: [],
     stock: 30,
+    brand: "Nike",
+    colors: ["Gris", "Blanco"],
+    sizes: ["26 MX", "27 MX", "28 MX", "29 MX"],
   },
   {
     id: 11,
@@ -125,6 +155,9 @@ export const products: Product[] = [
     rating: 4.6,
     reviews: [],
     stock: 40,
+    brand: "LUXA",
+    colors: ["Negro"],
+    sizes: ["23 MX", "24 MX", "25 MX", "26 MX"],
   },
   // Sandalias
   {
@@ -137,6 +170,9 @@ export const products: Product[] = [
     rating: 5.0,
     reviews: [],
     stock: 7,
+    brand: "Valentino",
+    colors: ["Negro"],
+    sizes: ["24 MX", "25 MX", "26 MX"],
   },
   {
     id: 13,
@@ -148,6 +184,9 @@ export const products: Product[] = [
     rating: 4.7,
     reviews: [{ id: 1, author: "Fernanda C.", rating: 5, comment: "Son súper cómodas y combinan con todo." }],
     stock: 22,
+    brand: "Michael Kors",
+    colors: ["Rosa", "Dorado"],
+    sizes: ["23 MX", "24 MX", "25 MX", "26 MX"],
   },
   {
     id: 14,
@@ -159,6 +198,9 @@ export const products: Product[] = [
     rating: 4.6,
     reviews: [],
     stock: 28,
+    brand: "Tommy Hilfiger",
+    colors: ["Beige", "Café"],
+    sizes: ["24 MX", "25 MX", "26 MX"],
   },
   {
     id: 15,
@@ -170,6 +212,9 @@ export const products: Product[] = [
     rating: 4.8,
     reviews: [],
     stock: 15,
+    brand: "Tory Burch",
+    colors: ["Beige", "Negro"],
+    sizes: ["23 MX", "24 MX", "25 MX"],
   },
   // Ropa
   {
@@ -182,6 +227,9 @@ export const products: Product[] = [
     rating: 4.9,
     reviews: [{ id: 1, author: "Ana P.", rating: 5, comment: "Son una maravilla, muy cómodos y no se marcan." }],
     stock: 50,
+    brand: "Victoria's Secret",
+    colors: ["Negro"],
+    sizes: ["S", "M", "L"],
   },
   {
     id: 17,
@@ -194,6 +242,9 @@ export const products: Product[] = [
     rating: 4.7,
     reviews: [],
     stock: 45,
+    brand: "Tommy Hilfiger",
+    colors: ["Gris", "Negro", "Blanco"],
+    sizes: ["S", "M", "L", "XL"],
   },
   // Accesorios
   {
@@ -206,6 +257,9 @@ export const products: Product[] = [
     rating: 4.8,
     reviews: [],
     stock: 35,
+    brand: "Victoria's Secret",
+    colors: ["Blanco"],
+    sizes: ["Unitalla"],
   },
   {
     id: 19,
@@ -217,6 +271,9 @@ export const products: Product[] = [
     rating: 4.9,
     reviews: [{ id: 1, author: "Laura G.", rating: 5, comment: "¡Cabe en todas mis bolsas! Muy práctica y bonita." }],
     stock: 25,
+    brand: "Coach",
+    colors: ["Blanco", "Café", "Negro"],
+    sizes: ["Unitalla"],
   },
   // Sets de Regalo
   {
@@ -229,6 +286,9 @@ export const products: Product[] = [
     rating: 5.0,
     reviews: [{ id: 1, author: "Jimena V.", rating: 5, comment: "Huele delicioso y la presentación es hermosa. ¡El regalo perfecto!" }],
     stock: 30,
+    brand: "Victoria's Secret",
+    colors: ["Rosa"],
+    sizes: ["Unitalla"],
   },
   // Suplementos
   {
@@ -241,6 +301,9 @@ export const products: Product[] = [
     rating: 4.8,
     reviews: [],
     stock: 40,
+    brand: "Goli",
+    colors: ["Rojo"],
+    sizes: ["60 Gomitas"],
   },
   {
     id: 22,
@@ -252,6 +315,9 @@ export const products: Product[] = [
     rating: 4.9,
     reviews: [],
     stock: 33,
+    brand: "HUM",
+    colors: ["Naranja"],
+    sizes: ["60 Cápsulas"],
   },
   {
     id: 23,
@@ -263,6 +329,9 @@ export const products: Product[] = [
     rating: 4.7,
     reviews: [],
     stock: 28,
+    brand: "Nello",
+    colors: ["Morado"],
+    sizes: ["15 Sobres"],
   },
   {
     id: 24,
@@ -274,6 +343,9 @@ export const products: Product[] = [
     rating: 4.9,
     reviews: [],
     stock: 25,
+    brand: "HUM",
+    colors: ["Rosa"],
+    sizes: ["30 Cápsulas"],
   },
    {
     id: 25,
@@ -286,6 +358,9 @@ export const products: Product[] = [
     rating: 4.8,
     reviews: [],
     stock: 18,
+    brand: "Zadig & Voltaire",
+    colors: ["Negro"],
+    sizes: ["Grande"],
   },
   {
     id: 26,
@@ -297,6 +372,9 @@ export const products: Product[] = [
     rating: 4.9,
     reviews: [],
     stock: 11,
+    brand: "Marc Jacobs",
+    colors: ["Café"],
+    sizes: ["Mediana"],
   },
   {
     id: 27,
@@ -308,6 +386,9 @@ export const products: Product[] = [
     rating: 4.7,
     reviews: [],
     stock: 30,
+    brand: "Tory Burch",
+    colors: ["Rosa"],
+    sizes: ["23 MX", "24 MX", "25 MX", "26 MX"],
   },
    {
     id: 28,
@@ -319,6 +400,9 @@ export const products: Product[] = [
     rating: 4.9,
     reviews: [],
     stock: 20,
+    brand: "Michael Kors",
+    colors: ["Negro", "Blanco"],
+    sizes: ["Grande"],
   },
   {
     id: 29,
@@ -331,6 +415,9 @@ export const products: Product[] = [
     rating: 4.8,
     reviews: [],
     stock: 26,
+    brand: "Coach",
+    colors: ["Blanco", "Rosa"],
+    sizes: ["24 MX", "25 MX", "26 MX"],
   },
   {
     id: 30,
@@ -342,5 +429,8 @@ export const products: Product[] = [
     rating: 5.0,
     reviews: [],
     stock: 9,
+    brand: "Tory Burch",
+    colors: ["Negro"],
+    sizes: ["Pequeña"],
   }
 ];

@@ -16,13 +16,16 @@ export interface Product {
   rating: number;
   reviews: Review[];
   stock: number;
+  brand: string;
+  colors: string[];
+  sizes: string[];
 }
 
 export interface CartItem extends Product {
   quantity: number;
 }
 
-export type Page = 'home' | 'category' | 'product' | 'cart' | 'checkout' | 'confirmation' | 'about' | 'careers' | 'press' | 'help' | 'howtobuy' | 'shipping' | 'returns';
+export type Page = 'home' | 'category' | 'product' | 'cart' | 'checkout' | 'confirmation' | 'about' | 'careers' | 'press' | 'help' | 'howtobuy' | 'shipping' | 'returns' | 'wishlist';
 
 export interface Order {
   orderId: string;

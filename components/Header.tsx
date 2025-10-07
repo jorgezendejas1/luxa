@@ -102,7 +102,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onSelectCategory, onSearch 
                     {/* Right side: Icons */}
                     <div className="flex items-center space-x-4">
                         <button className="text-gray-600 hover:text-pink-500"><UserIcon /></button>
-                        <button className="relative text-gray-600 hover:text-pink-500">
+                        <button onClick={() => onNavigate('wishlist')} className="relative text-gray-600 hover:text-pink-500">
                             <HeartIcon />
                              {favoritesCount > 0 && <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{favoritesCount}</span>}
                         </button>

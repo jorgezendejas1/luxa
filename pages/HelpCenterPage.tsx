@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 
-// Fix: Used React.FC to correctly type the component and allow the special `key` prop.
+// FIX: Changed FaqItem to be a React.FC to align with project conventions and ensure proper handling of React-specific props like 'key' by TypeScript.
 const FaqItem: React.FC<{ question: string, answer: string }> = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -70,7 +70,7 @@ const HelpCenterPage: React.FC = () => {
                         <div key={category} className="mb-10">
                             <h2 className="text-2xl font-bold text-pink-600 mb-4">{category}</h2>
                             {items.map((faq, index) => (
-                                <FaqItem key={index} question={faq.question} answer={faq.answer} />
+                                <FaqItem key={index} {...faq} />
                             ))}
                         </div>
                     ))}

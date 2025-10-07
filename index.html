@@ -7,21 +7,48 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- React and ReactDOM -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    
     <!-- Babel Standalone -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script type="importmap">
+
+    <!-- Import Map for React ES Modules -->
+    <script type="importmap">
 {
   "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "react/": "https://aistudiocdn.com/react@^19.2.0/"
   }
 }
 </script>
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  .grid .group {
+    animation: popIn 0.6s ease-out backwards;
+  }
+  .grid .group:nth-child(1) { animation-delay: 0.05s; }
+  .grid .group:nth-child(2) { animation-delay: 0.1s; }
+  .grid .group:nth-child(3) { animation-delay: 0.15s; }
+  .grid .group:nth-child(4) { animation-delay: 0.2s; }
+  .grid .group:nth-child(5) { animation-delay: 0.25s; }
+  .grid .group:nth-child(6) { animation-delay: 0.3s; }
+  .grid .group:nth-child(7) { animation-delay: 0.35s; }
+  .grid .group:nth-child(8) { animation-delay: 0.4s; }
+  .grid .group:nth-child(9) { animation-delay: 0.45s; }
+  .grid .group:nth-child(10) { animation-delay: 0.5s; }
+  .grid .group:nth-child(11) { animation-delay: 0.55s; }
+  .grid .group:nth-child(12) { animation-delay: 0.6s; }
+</style>
 </head>
   <body class="bg-white">
     <div id="root"></div>
