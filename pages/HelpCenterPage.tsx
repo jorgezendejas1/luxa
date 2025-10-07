@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Page } from '../types';
 
@@ -36,7 +35,6 @@ const FaqItem: React.FC<Faq> = ({ question, answer }) => {
                 </svg>
             </button>
             {isOpen && (
-                // Use a <div> to safely render React.ReactNode, preventing nesting issues
                 <div className="pb-5 pr-4 text-gray-600 animate-fade-in">
                     {answer}
                 </div>
@@ -55,28 +53,28 @@ const HelpCenterPage: React.FC<HelpCenterPageProps> = ({ onNavigate }) => {
         "Pedidos y Pagos": [
             {
                 question: "¿Qué métodos de pago aceptan?",
-                answer: "Aceptamos todas las principales tarjetas de crédito y débito (Visa, Mastercard, American Express), pagos a través de Mercado Pago y pagos en efectivo en cualquier tienda OXXO del país."
+                answer: <p>Aceptamos todas las principales tarjetas de crédito y débito (Visa, Mastercard, American Express), pagos a través de Mercado Pago y pagos en efectivo en cualquier tienda OXXO del país.</p>
             },
             {
                 question: "¿Es seguro comprar en LUXA?",
-                answer: "¡Absolutamente! Nuestro sitio utiliza encriptación SSL para proteger todos tus datos personales y de pago. La seguridad de tu información es nuestra máxima prioridad."
+                answer: <p>¡Absolutamente! Nuestro sitio utiliza encriptación SSL para proteger todos tus datos personales y de pago. La seguridad de tu información es nuestra máxima prioridad.</p>
             }
         ],
         "Envíos y Entregas": [
             {
                 question: "¿Cuánto cuesta el envío?",
-                answer: "Ofrecemos envío estándar gratuito en todas las compras superiores a $999 MXN. Para pedidos inferiores a ese monto, el costo de envío es de $150 MXN a cualquier parte de México."
+                answer: <p>Ofrecemos envío estándar gratuito en todas las compras superiores a $999 MXN. Para pedidos inferiores a ese monto, el costo de envío es de $150 MXN a cualquier parte de México.</p>
             },
             {
                 question: "¿Cuánto tiempo tarda en llegar mi pedido?",
-                answer: "El tiempo de entrega estándar es de 3 a 5 días hábiles. Una vez que tu pedido sea enviado, recibirás un correo electrónico con el número de seguimiento para que puedas rastrearlo."
+                answer: <p>El tiempo de entrega estándar es de 3 a 5 días hábiles. Una vez que tu pedido sea enviado, recibirás un correo electrónico con el número de seguimiento para que puedas rastrearlo.</p>
             }
         ],
         "Devoluciones": [
             {
                 question: "¿Puedo devolver un producto?",
                 answer: (
-                    <>
+                    <p>
                         Sí, tienes 15 días a partir de la fecha de recepción para solicitar una devolución. 
                         El producto debe estar en su estado original, sin usar y con todas sus etiquetas. 
                         Consulta nuestra{' '}
@@ -84,7 +82,7 @@ const HelpCenterPage: React.FC<HelpCenterPageProps> = ({ onNavigate }) => {
                             Política de Devoluciones
                         </button>
                         {' '}para más detalles.
-                    </>
+                    </p>
                 )
             }
         ]
