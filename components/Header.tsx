@@ -33,16 +33,35 @@ const CartIcon = () => (
     </svg>
 );
 
+const MenuIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+);
+
+const CloseIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+    </svg>
+);
+
 const Header: React.FC<HeaderProps> = ({ onNavigate, onSelectCategory, onSearch }) => {
     const { cartCount } = useCart();
     const { favoritesCount } = useFavorites();
     const [searchQuery, setSearchQuery] = useState('');
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const handleSearchSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (searchQuery.trim()) {
             onSearch(searchQuery.trim());
+            setIsMobileMenuOpen(false); // Close mobile menu on search
         }
+    };
+    
+    const handleMobileLinkClick = (category: string) => {
+        onSelectCategory(category);
+        setIsMobileMenuOpen(false);
     };
 
     const categories = ["Bolsas", "Tenis", "Sandalias", "Ropa", "Accesorios", "Suplementos", "Sets de Regalo"];
@@ -54,9 +73,17 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onSelectCategory, onSearch 
             </div>
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center py-4">
-                    <h1 onClick={() => onNavigate('home')} className="text-4xl font-bold text-gray-800 cursor-pointer tracking-widest uppercase">
-                        LUXA
-                    </h1>
+                    {/* Left side: Hamburger (mobile) + Logo */}
+                    <div className="flex items-center space-x-4">
+                        <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden text-gray-600 hover:text-pink-500">
+                            <MenuIcon />
+                        </button>
+                        <h1 onClick={() => onNavigate('home')} className="text-3xl md:text-4xl font-bold text-gray-800 cursor-pointer tracking-widest uppercase">
+                            LUXA
+                        </h1>
+                    </div>
+                    
+                    {/* Center: Search bar (desktop) */}
                     <div className="hidden md:flex flex-1 justify-center">
                        <form onSubmit={handleSearchSubmit} className="relative w-full max-w-lg">
                             <input
@@ -71,6 +98,8 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onSelectCategory, onSearch 
                             </button>
                         </form>
                     </div>
+
+                    {/* Right side: Icons */}
                     <div className="flex items-center space-x-4">
                         <button className="text-gray-600 hover:text-pink-500"><UserIcon /></button>
                         <button className="relative text-gray-600 hover:text-pink-500">
@@ -93,6 +122,43 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onSelectCategory, onSearch 
                     <li onClick={() => onSelectCategory('all')} className="text-red-500 font-semibold hover:text-red-700 cursor-pointer transition-colors duration-200">Ofertas</li>
                 </ul>
             </nav>
+            
+            {/* Mobile Menu Overlay */}
+            {isMobileMenuOpen && (
+                <div className="fixed inset-0 bg-white z-50 flex flex-col md:hidden">
+                    <div className="flex justify-between items-center p-4 border-b">
+                         <h1 className="text-3xl font-bold text-gray-800 tracking-widest uppercase">LUXA</h1>
+                         <button onClick={() => setIsMobileMenuOpen(false)} className="text-gray-600">
+                             <CloseIcon />
+                         </button>
+                    </div>
+
+                    <div className="p-4 border-b">
+                        <form onSubmit={handleSearchSubmit} className="relative w-full">
+                            <input
+                                type="text"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                placeholder="Buscar productos..."
+                                className="w-full border border-gray-300 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-pink-300"
+                            />
+                            <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+                                <SearchIcon />
+                            </button>
+                        </form>
+                    </div>
+
+                    <nav className="flex-grow p-4">
+                        <ul className="flex flex-col space-y-6 text-lg font-semibold">
+                             <li onClick={() => handleMobileLinkClick('all')} className="text-gray-700 hover:text-pink-500 cursor-pointer">Novedades</li>
+                             {categories.map(cat => (
+                                <li key={cat} onClick={() => handleMobileLinkClick(cat)} className="text-gray-700 hover:text-pink-500 cursor-pointer">{cat}</li>
+                             ))}
+                             <li onClick={() => handleMobileLinkClick('all')} className="text-red-500 hover:text-red-700 cursor-pointer">Ofertas</li>
+                        </ul>
+                    </nav>
+                </div>
+            )}
         </header>
     );
 };

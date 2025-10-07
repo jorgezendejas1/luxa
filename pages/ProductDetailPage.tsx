@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Product, Page } from '../types';
 import { useCart } from '../context/CartContext';
@@ -124,7 +123,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
             {/* Related Products */}
             <div className="my-16">
                  <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Productos Similares</h2>
-                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                      {relatedProducts.map(p => (
                          <ProductCard key={p.id} product={p} onSelectProduct={onSelectProduct} />
                      ))}

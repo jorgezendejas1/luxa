@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Product } from '../types';
 import ProductCard from '../components/ProductCard';
@@ -69,7 +68,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ products, categoryTitle, on
                 {/* Product Grid */}
                 <main className="w-full md:w-3/4">
                     {filteredAndSortedProducts.length > 0 ? (
-                        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                             {filteredAndSortedProducts.map(product => (
                                 <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} />
                             ))}

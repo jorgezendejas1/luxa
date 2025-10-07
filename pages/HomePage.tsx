@@ -32,7 +32,7 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectProduct, onSelectCategory }
             <section className="py-16 bg-white">
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Novedades</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                         {newArrivals.map(product => (
                             <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} />
                         ))}
@@ -60,7 +60,7 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectProduct, onSelectCategory }
             <section className="py-16 bg-pink-50">
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Ofertas del Día</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                         {dailyDeals.map(product => (
                             <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} />
                         ))}
@@ -72,7 +72,7 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectProduct, onSelectCategory }
             <section className="py-16 bg-white">
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Más Vendidos</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                         {bestSellers.map(product => (
                             <ProductCard key={product.id} product={product} onSelectProduct={onSelectProduct} />
                         ))}
