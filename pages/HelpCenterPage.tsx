@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 
-// FIX: Changed FaqItem to be a React.FC to align with project conventions and ensure proper handling of React-specific props like 'key' by TypeScript.
 const FaqItem: React.FC<{ question: string, answer: string }> = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -22,11 +21,11 @@ const FaqItem: React.FC<{ question: string, answer: string }> = ({ question, ans
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </button>
-            <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
-                <div className="pb-5 pr-4 text-gray-600">
+            {isOpen && (
+                <p className="pb-5 pr-4 text-gray-600 animate-fade-in">
                     {answer}
-                </div>
-            </div>
+                </p>
+            )}
         </div>
     );
 };
