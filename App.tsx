@@ -66,7 +66,7 @@ const App: React.FC = () => {
                 return <CategoryPage products={filteredProducts} categoryTitle={searchQuery ? `Resultados para "${searchQuery}"` : selectedCategory === 'all' ? 'Todos los productos' : selectedCategory} onSelectProduct={handleSelectProduct} />;
             case 'product':
                 if (selectedProduct) {
-                    return <ProductDetailPage product={selectedProduct} onSelectProduct={handleSelectProduct} />;
+                    return <ProductDetailPage product={selectedProduct} onSelectProduct={handleSelectProduct} onNavigate={navigateTo} />;
                 }
                 return <HomePage onSelectProduct={handleSelectProduct} onSelectCategory={handleSelectCategory} />; // fallback
             case 'cart':

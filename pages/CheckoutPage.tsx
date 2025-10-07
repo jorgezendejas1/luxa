@@ -25,6 +25,10 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ onPlaceOrder }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (cartItems.length === 0) {
+      alert("Tu carrito está vacío.");
+      return;
+    }
     const newOrder: Order = {
         orderId: `MX${Date.now()}`,
         items: cartItems,
@@ -58,18 +62,39 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ onPlaceOrder }) => {
 
           <h2 className="text-xl font-bold mt-8 mb-4">Método de Pago</h2>
           <div className="space-y-3">
-             <label className="flex items-center p-4 border rounded-lg cursor-pointer">
+             <label className="flex items-center p-4 border rounded-lg cursor-pointer has-[:checked]:bg-pink-50 has-[:checked]:border-pink-400">
                 <input type="radio" name="payment" value="card" checked={paymentMethod === 'card'} onChange={() => setPaymentMethod('card')} className="form-radio text-pink-500" />
                 <span className="ml-3 font-semibold">💳 Tarjeta de Crédito/Débito</span>
              </label>
-             <label className="flex items-center p-4 border rounded-lg cursor-pointer">
+              {paymentMethod === 'card' && (
+                  <div className="p-4 border rounded-lg bg-gray-50 space-y-3 ml-8 animate-fade-in">
+                      <input name="cardName" placeholder="Nombre en la tarjeta" required={paymentMethod === 'card'} className="p-2 border rounded-md w-full" />
+                      <input name="cardNumber" placeholder="Número de tarjeta (16 dígitos)" type="tel" inputMode="numeric" pattern="[0-9\s]{13,19}" maxLength={19} required={paymentMethod === 'card'} className="p-2 border rounded-md w-full" />
+                      <div className="flex gap-4">
+                          <input name="expiry" placeholder="MM/AA" required={paymentMethod === 'card'} className="p-2 border rounded-md w-1/2" />
+                          <input name="cvv" placeholder="CVV" type="tel" inputMode="numeric" pattern="\d{3,4}" maxLength={4} required={paymentMethod === 'card'} className="p-2 border rounded-md w-1/2" />
+                      </div>
+                  </div>
+              )}
+
+             <label className="flex items-center p-4 border rounded-lg cursor-pointer has-[:checked]:bg-pink-50 has-[:checked]:border-pink-400">
                 <input type="radio" name="payment" value="oxxo" checked={paymentMethod === 'oxxo'} onChange={() => setPaymentMethod('oxxo')} className="form-radio text-pink-500"/>
                 <span className="ml-3 font-semibold">🏪 Pago en OXXO</span>
              </label>
-             <label className="flex items-center p-4 border rounded-lg cursor-pointer">
+              {paymentMethod === 'oxxo' && (
+                  <div className="p-4 border rounded-lg bg-gray-50 text-sm ml-8 animate-fade-in">
+                      <p>Al confirmar tu pedido, se generará una referencia de pago que podrás usar en cualquier tienda OXXO. La referencia aparecerá en la página de confirmación.</p>
+                  </div>
+              )}
+             <label className="flex items-center p-4 border rounded-lg cursor-pointer has-[:checked]:bg-pink-50 has-[:checked]:border-pink-400">
                 <input type="radio" name="payment" value="mercado" checked={paymentMethod === 'mercado'} onChange={() => setPaymentMethod('mercado')} className="form-radio text-pink-500"/>
                 <span className="ml-3 font-semibold">💰 Mercado Pago</span>
              </label>
+              {paymentMethod === 'mercado' && (
+                  <div className="p-4 border rounded-lg bg-gray-50 text-sm ml-8 animate-fade-in">
+                      <p>Serás redirigido a la página segura de Mercado Pago para completar tu compra después de hacer clic en "Confirmar Pedido".</p>
+                  </div>
+              )}
           </div>
         </div>
 
@@ -78,8 +103,8 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ onPlaceOrder }) => {
           <h2 className="text-xl font-bold mb-4 border-b pb-2">Resumen de Pedido</h2>
           {cartItems.map(item => (
             <div key={item.id} className="flex justify-between items-center text-sm mb-2">
-                <span>{item.name} x {item.quantity}</span>
-                <span className="font-medium">${(item.price * item.quantity).toLocaleString('es-MX')}</span>
+                <span className="truncate pr-2">{item.name} x {item.quantity}</span>
+                <span className="font-medium whitespace-nowrap">${((item.discountPrice || item.price) * item.quantity).toLocaleString('es-MX')}</span>
             </div>
           ))}
           <div className="border-t mt-4 pt-4 space-y-2">

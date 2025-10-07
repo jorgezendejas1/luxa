@@ -11,7 +11,7 @@ const CareersPage: React.FC = () => {
     return (
         <div className="bg-white">
             <div className="relative h-64 md:h-80 bg-gray-900">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop" alt="Equipo colaborando" className="w-full h-full object-cover opacity-50"/>
+                <img src="https://raw.githubusercontent.com/jorgezendejas1/luxa/main/img/careers_1.jpg" alt="Equipo colaborando" className="w-full h-full object-cover opacity-50"/>
                 <div className="absolute inset-0 flex items-center justify-center">
                     <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-wider text-center">Únete a Nuestro Equipo</h1>
                 </div>

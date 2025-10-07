@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 
-const FaqItem = ({ question, answer }: { question: string, answer: string }) => {
+// Fix: Used React.FC to correctly type the component and allow the special `key` prop.
+const FaqItem: React.FC<{ question: string, answer: string }> = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
