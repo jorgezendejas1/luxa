@@ -89,7 +89,7 @@ const HelpCenterPage: React.FC<HelpCenterPageProps> = ({ onNavigate }) => {
     };
 
     return (
-        <div className="bg-white py-16">
+        <div className="bg-white py-16 animate-fade-in">
             <div className="container mx-auto px-6">
                 <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-12">Centro de Ayuda</h1>
                 <div className="max-w-3xl mx-auto">

@@ -89,6 +89,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ products, categoryTitle, on
                 tempProducts.sort((a, b) => b.rating - a.rating);
                 break;
             default: // relevance
+                 tempProducts.sort((a, b) => (b.rating * (b.reviews.length + 1)) - (a.rating * (a.reviews.length + 1)));
                 break;
         }
 
@@ -101,7 +102,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ products, categoryTitle, on
     ];
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 animate-fade-in">
             <div className="mb-6">
                 <Breadcrumb links={breadcrumbLinks} />
             </div>

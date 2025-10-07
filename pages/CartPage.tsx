@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { useCart } from '../context/CartContext';
 import { useCurrency } from '../context/CurrencyContext';
@@ -44,7 +43,7 @@ const CartPage: React.FC<CartPageProps> = ({ onNavigate }) => {
   
   if (cartItems.length === 0) {
     return (
-        <div className="container mx-auto px-4 py-20 text-center">
+        <div className="container mx-auto px-4 py-20 text-center animate-fade-in">
             <h1 className="text-3xl font-bold mb-4">Tu carrito está vacío</h1>
             <p className="text-gray-600 mb-8">Parece que no has agregado nada a tu carrito. ¡Explora nuestros productos!</p>
             <button onClick={() => onNavigate('home')} className="bg-black text-white font-bold py-3 px-8 rounded-md hover:bg-gray-800 transition-colors">
@@ -56,7 +55,7 @@ const CartPage: React.FC<CartPageProps> = ({ onNavigate }) => {
 
   return (
     <>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 animate-fade-in">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Carrito de Compras</h1>
           {cartItems.length > 0 && (

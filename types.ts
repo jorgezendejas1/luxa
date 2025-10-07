@@ -21,12 +21,29 @@ export interface Product {
   sizes: string[];
 }
 
+// FIX: Add CartItem type, which extends Product with a quantity.
 export interface CartItem extends Product {
   quantity: number;
 }
 
-export type Page = 'home' | 'category' | 'product' | 'cart' | 'checkout' | 'confirmation' | 'about' | 'careers' | 'press' | 'help' | 'howtobuy' | 'shipping' | 'returns' | 'wishlist';
+// FIX: Add Page type for navigation across the application.
+export type Page =
+  | 'home'
+  | 'category'
+  | 'product'
+  | 'cart'
+  | 'checkout'
+  | 'confirmation'
+  | 'about'
+  | 'careers'
+  | 'press'
+  | 'help'
+  | 'how-to-buy'
+  | 'shipping'
+  | 'returns'
+  | 'wishlist';
 
+// FIX: Add Order type for checkout process.
 export interface Order {
   orderId: string;
   items: CartItem[];

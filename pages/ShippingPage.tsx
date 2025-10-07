@@ -2,7 +2,7 @@ import React from 'react';
 
 const ShippingPage: React.FC = () => {
     return (
-        <div className="bg-white py-16">
+        <div className="bg-white py-16 animate-fade-in">
             <div className="container mx-auto px-6 text-gray-700">
                 <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-12">Envíos y Entregas</h1>
                 <div className="max-w-4xl mx-auto">

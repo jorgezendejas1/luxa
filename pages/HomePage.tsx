@@ -15,7 +15,7 @@ const HomePage: React.FC<HomePageProps> = ({ onSelectProduct, onSelectCategory }
     const dailyDeals = products.filter(p => p.discountPrice).slice(0, 4);
 
     return (
-        <div>
+        <div className="animate-fade-in">
             {/* Main Banner */}
             <div className="relative bg-gray-200 h-64 md:h-96 flex items-center justify-center text-center overflow-hidden">
                 <img src="https://raw.githubusercontent.com/jorgezendejas1/luxa/main/img/banner_1.jpg" alt="Fashion Banner" className="absolute w-full h-full object-cover" loading="lazy"/>

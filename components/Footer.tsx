@@ -37,19 +37,19 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
                         <h3 className="font-bold text-lg mb-4 text-gray-800">Atención al Cliente</h3>
-                        <ul>
-                            <li className="mb-2"><button onClick={() => onNavigate('help')} className="hover:text-pink-500">Centro de Ayuda</button></li>
-                            <li className="mb-2"><button onClick={() => onNavigate('howtobuy')} className="hover:text-pink-500">Cómo Comprar</button></li>
-                            <li className="mb-2"><button onClick={() => onNavigate('shipping')} className="hover:text-pink-500">Envíos y Entregas</button></li>
-                            <li className="mb-2"><button onClick={() => onNavigate('returns')} className="hover:text-pink-500">Política de Devoluciones</button></li>
+                         <ul className="space-y-2">
+                            <li><button onClick={() => onNavigate('help')} className="hover:text-pink-500">Centro de Ayuda</button></li>
+                            <li><button onClick={() => onNavigate('how-to-buy')} className="hover:text-pink-500">Cómo Comprar</button></li>
+                            <li><button onClick={() => onNavigate('shipping')} className="hover:text-pink-500">Envíos</button></li>
+                            <li><button onClick={() => onNavigate('returns')} className="hover:text-pink-500">Devoluciones</button></li>
                         </ul>
                     </div>
                     <div>
                         <h3 className="font-bold text-lg mb-4 text-gray-800">Sobre Nosotros</h3>
-                        <ul>
-                            <li className="mb-2"><button onClick={() => onNavigate('about')} className="hover:text-pink-500">Nuestra Historia</button></li>
-                            <li className="mb-2"><button onClick={() => onNavigate('careers')} className="hover:text-pink-500">Carreras</button></li>
-                            <li className="mb-2"><button onClick={() => onNavigate('press')} className="hover:text-pink-500">Prensa</button></li>
+                         <ul className="space-y-2">
+                            <li><button onClick={() => onNavigate('about')} className="hover:text-pink-500">Nuestra Historia</button></li>
+                            <li><button onClick={() => onNavigate('careers')} className="hover:text-pink-500">Carreras</button></li>
+                             <li><button onClick={() => onNavigate('press')} className="hover:text-pink-500">Prensa</button></li>
                         </ul>
                     </div>
                     <div>

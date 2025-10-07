@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Order, Page } from '../types';
 import { useCurrency } from '../context/CurrencyContext';
@@ -19,7 +18,7 @@ const ConfirmationPage: React.FC<ConfirmationPageProps> = ({ order, onNavigate }
 
 
   return (
-    <div className="container mx-auto px-4 py-16 text-center">
+    <div className="container mx-auto px-4 py-16 text-center animate-fade-in">
       <div className="bg-white max-w-2xl mx-auto p-8 rounded-lg shadow-lg">
         <svg className="w-16 h-16 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         <h1 className="text-3xl font-bold text-gray-800 mb-2">¡Gracias por tu compra!</h1>

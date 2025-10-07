@@ -1,40 +1,34 @@
-
 import React from 'react';
 import { Product } from '../types';
-import { useFavorites } from '../context/FavoritesContext';
 import { useCurrency } from '../context/CurrencyContext';
+import { useFavorites } from '../context/FavoritesContext';
 
 interface ProductCardProps {
     product: Product;
     onSelectProduct: (product: Product) => void;
 }
 
-const HeartIconSolid = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-pink-500" viewBox="0 0 20 20" fill="currentColor">
-        <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-    </svg>
-);
-
-const HeartIconOutline = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z" />
+const HeartIcon: React.FC<{ filled: boolean }> = ({ filled }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 ${filled ? 'text-pink-500' : 'text-gray-400'}`} fill={filled ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.664l1.318-1.346a4.5 4.5 0 116.364 6.364L12 21l-7.682-7.682a4.5 4.5 0 010-6.364z" />
     </svg>
 );
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProduct }) => {
-    const { toggleFavorite, isFavorite } = useFavorites();
     const { convertPrice } = useCurrency();
+    const { isFavorite, toggleFavorite } = useFavorites();
+
     const isFav = isFavorite(product.id);
-    
+
     const handleFavoriteClick = (e: React.MouseEvent) => {
-        e.stopPropagation();
+        e.stopPropagation(); // Prevent navigation when clicking the heart
         toggleFavorite(product.id);
     };
     
     return (
         <div 
             onClick={() => onSelectProduct(product)}
-            className="group cursor-pointer bg-white rounded-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl"
+            className="group bg-white rounded-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl cursor-pointer"
         >
             <div className="relative">
                 <img 
@@ -46,11 +40,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProduct }) =
                 {product.discountPrice && (
                     <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">OFERTA</span>
                 )}
-                <button 
+                 <button
                     onClick={handleFavoriteClick}
-                    className="absolute top-3 right-3 bg-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute top-2 right-2 bg-white rounded-full p-2 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
+                    aria-label="Añadir a wishlist"
                 >
-                    {isFav ? <HeartIconSolid /> : <HeartIconOutline />}
+                    <HeartIcon filled={isFav} />
                 </button>
             </div>
             <div className="p-4">

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Product, Page } from '../types';
 import { useCart } from '../context/CartContext';
@@ -67,7 +66,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
     ];
 
     return (
-        <div className="container mx-auto px-4 py-10">
+        <div className="container mx-auto px-4 py-10 animate-fade-in">
              <div className="mb-8">
                 <Breadcrumb links={breadcrumbLinks} />
             </div>

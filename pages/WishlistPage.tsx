@@ -29,7 +29,7 @@ const WishlistPage: React.FC<WishlistPageProps> = ({ onSelectProduct, onNavigate
 
     if (favoritedProducts.length === 0) {
         return (
-            <div className="container mx-auto px-4 py-20 text-center">
+            <div className="container mx-auto px-4 py-20 text-center animate-fade-in">
                 <h1 className="text-3xl font-bold mb-4">Tu wishlist está vacía</h1>
                 <p className="text-gray-600 mb-8">Guarda tus productos favoritos haciendo clic en el corazón.</p>
                 <button onClick={() => onNavigate('home')} className="bg-black text-white font-bold py-3 px-8 rounded-md hover:bg-gray-800 transition-colors">
@@ -40,7 +40,7 @@ const WishlistPage: React.FC<WishlistPageProps> = ({ onSelectProduct, onNavigate
     }
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 animate-fade-in">
             <h1 className="text-3xl font-bold mb-6">Mi Wishlist</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {favoritedProducts.map(product => (

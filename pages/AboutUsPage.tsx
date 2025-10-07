@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutUsPage: React.FC = () => {
     return (
-        <div className="bg-white">
+        <div className="bg-white animate-fade-in">
             <div className="relative h-64 md:h-80 bg-gray-900">
                 <img src="https://raw.githubusercontent.com/jorgezendejas1/luxa/main/img/about_1.jpg" alt="Equipo de LUXA trabajando" className="w-full h-full object-cover opacity-50" loading="lazy"/>
                 <div className="absolute inset-0 flex items-center justify-center">
