@@ -4,11 +4,13 @@ import { Product, Page } from '../types';
 import { useCart } from '../context/CartContext';
 import { products } from '../data/products';
 import ProductCard from '../components/ProductCard';
+import Breadcrumb from '../components/Breadcrumb';
 
 interface ProductDetailPageProps {
     product: Product;
     onSelectProduct: (product: Product) => void;
     onNavigate: (page: Page) => void;
+    onSelectCategory: (category: string) => void;
 }
 
 const StarIcon: React.FC<{ filled: boolean }> = ({ filled }) => (
@@ -30,7 +32,7 @@ const WhatsAppIcon = () => (
 );
 
 
-const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelectProduct, onNavigate }) => {
+const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelectProduct, onNavigate, onSelectCategory }) => {
     const [mainImage, setMainImage] = useState(product.images[0]);
     const [quantity, setQuantity] = useState(1);
     const { addToCart } = useCart();
@@ -56,9 +58,17 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
     const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`;
     const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`;
 
+    const breadcrumbLinks = [
+        { name: 'Inicio', onClick: () => onNavigate('home') },
+        { name: product.category, onClick: () => onSelectCategory(product.category) },
+        { name: product.name }
+    ];
 
     return (
         <div className="container mx-auto px-4 py-10">
+             <div className="mb-8">
+                <Breadcrumb links={breadcrumbLinks} />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {/* Image Gallery */}
                 <div>

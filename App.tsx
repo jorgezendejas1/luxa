@@ -89,10 +89,20 @@ const App: React.FC = () => {
                     (selectedCategory === 'all' || p.category === selectedCategory) &&
                     (p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.category.toLowerCase().includes(searchQuery.toLowerCase()))
                 );
-                return <CategoryPage products={filteredProducts} categoryTitle={searchQuery ? `Resultados para "${searchQuery}"` : selectedCategory === 'all' ? 'Todos los productos' : selectedCategory} onSelectProduct={handleSelectProduct} />;
+                return <CategoryPage 
+                    products={filteredProducts} 
+                    categoryTitle={searchQuery ? `Resultados para "${searchQuery}"` : selectedCategory === 'all' ? 'Todos los productos' : selectedCategory} 
+                    onSelectProduct={handleSelectProduct}
+                    onNavigate={navigateTo}
+                />;
             case 'product':
                 if (selectedProduct) {
-                    return <ProductDetailPage product={selectedProduct} onSelectProduct={handleSelectProduct} onNavigate={navigateTo} />;
+                    return <ProductDetailPage 
+                        product={selectedProduct} 
+                        onSelectProduct={handleSelectProduct} 
+                        onNavigate={navigateTo}
+                        onSelectCategory={handleSelectCategory}
+                    />;
                 }
                 return <HomePage onSelectProduct={handleSelectProduct} onSelectCategory={handleSelectCategory} />; // fallback
             case 'cart':

@@ -1,11 +1,13 @@
 import React, { useState, useMemo } from 'react';
-import { Product } from '../types';
+import { Product, Page } from '../types';
 import ProductCard from '../components/ProductCard';
+import Breadcrumb from '../components/Breadcrumb';
 
 interface CategoryPageProps {
     products: Product[];
     categoryTitle: string;
     onSelectProduct: (product: Product) => void;
+    onNavigate: (page: Page) => void;
 }
 
 const FilterSection: React.FC<{ title: string; items: string[]; name: string; selectedItems: string[]; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; }> = ({ title, items, name, selectedItems, onChange }) => (
@@ -29,7 +31,7 @@ const FilterSection: React.FC<{ title: string; items: string[]; name: string; se
     </div>
 );
 
-const CategoryPage: React.FC<CategoryPageProps> = ({ products, categoryTitle, onSelectProduct }) => {
+const CategoryPage: React.FC<CategoryPageProps> = ({ products, categoryTitle, onSelectProduct, onNavigate }) => {
     const [filters, setFilters] = useState({
         sort: 'default',
         brands: [] as string[],
@@ -93,9 +95,16 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ products, categoryTitle, on
         return tempProducts;
     }, [products, filters]);
 
+    const breadcrumbLinks = [
+        { name: 'Inicio', onClick: () => onNavigate('home') },
+        { name: categoryTitle }
+    ];
 
     return (
         <div className="container mx-auto px-4 py-8">
+            <div className="mb-6">
+                <Breadcrumb links={breadcrumbLinks} />
+            </div>
             <h1 className="text-3xl font-bold mb-6 capitalize">{categoryTitle}</h1>
             <div className="flex flex-col md:flex-row gap-8">
                 {/* Filters */}
