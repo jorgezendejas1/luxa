@@ -1,7 +1,7 @@
-
 import React, { useState, useMemo } from 'react';
 import { useCart } from '../context/CartContext';
 import { Page } from '../types';
+import ConfirmationDialog from '../components/ConfirmationDialog';
 
 interface CartPageProps {
   onNavigate: (page: Page) => void;
@@ -14,9 +14,10 @@ const TrashIcon = () => (
 );
 
 const CartPage: React.FC<CartPageProps> = ({ onNavigate }) => {
-  const { cartItems, updateQuantity, removeFromCart } = useCart();
+  const { cartItems, updateQuantity, removeFromCart, clearCart } = useCart();
   const [coupon, setCoupon] = useState('');
   const [discount, setDiscount] = useState(0);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const subtotal = useMemo(() => {
     return cartItems.reduce((total, item) => total + (item.discountPrice || item.price) * item.quantity, 0);
@@ -28,6 +29,11 @@ const CartPage: React.FC<CartPageProps> = ({ onNavigate }) => {
     } else {
       alert('Cupón no válido');
     }
+  };
+
+  const handleConfirmEmptyCart = () => {
+    clearCart();
+    setShowConfirm(false);
   };
 
   const shippingCost = subtotal > 999 ? 0 : 150;
@@ -46,83 +52,106 @@ const CartPage: React.FC<CartPageProps> = ({ onNavigate }) => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Carrito de Compras</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-md">
-                {cartItems.map(item => (
-                    <div key={item.id} className="flex items-center p-4 border-b last:border-b-0">
-                        <img src={item.images[0]} alt={item.name} className="w-24 h-24 object-cover rounded-md" />
-                        <div className="flex-grow ml-4">
-                            <h2 className="font-semibold">{item.name}</h2>
-                            <p className="text-sm text-gray-500">{item.category}</p>
-                            <p className="font-bold mt-1">${(item.discountPrice || item.price).toLocaleString('es-MX')} MXN</p>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <input
-                                type="number"
-                                value={item.quantity}
-                                onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
-                                min="1"
-                                className="w-16 border text-center rounded-md"
-                            />
-                            <button onClick={() => removeFromCart(item.id)} className="text-gray-500 hover:text-red-500">
-                               <TrashIcon />
-                            </button>
-                        </div>
-                    </div>
-                ))}
-            </div>
+    <>
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold">Carrito de Compras</h1>
+          {cartItems.length > 0 && (
+              <button
+                  onClick={() => setShowConfirm(true)}
+                  className="text-sm text-gray-500 hover:text-red-500 hover:underline transition-colors"
+                  aria-label="Vaciar el carrito de compras"
+              >
+                  Vaciar carrito
+              </button>
+          )}
         </div>
-        <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-bold mb-4 border-b pb-2">Resumen de Compra</h2>
-                <div className="space-y-2">
-                    <div className="flex justify-between">
-                        <span>Subtotal</span>
-                        <span>${subtotal.toLocaleString('es-MX')} MXN</span>
-                    </div>
-                     <div className="flex justify-between">
-                        <span>Envío</span>
-                        <span>{shippingCost === 0 ? 'Gratis' : `$${shippingCost.toLocaleString('es-MX')} MXN`}</span>
-                    </div>
-                    {discount > 0 && (
-                        <div className="flex justify-between text-green-600">
-                            <span>Descuento (10%)</span>
-                            <span>-${(subtotal * discount).toLocaleString('es-MX')} MXN</span>
-                        </div>
-                    )}
-                </div>
-                <div className="mt-4 pt-4 border-t">
-                    <div className="flex justify-between font-bold text-lg">
-                        <span>Total</span>
-                        <span>${total.toLocaleString('es-MX')} MXN</span>
-                    </div>
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+              <div className="bg-white rounded-lg shadow-md">
+                  {cartItems.map(item => (
+                      <div key={item.id} className="flex items-center p-4 border-b last:border-b-0">
+                          <img src={item.images[0]} alt={item.name} className="w-24 h-24 object-cover rounded-md" />
+                          <div className="flex-grow ml-4">
+                              <h2 className="font-semibold">{item.name}</h2>
+                              <p className="text-sm text-gray-500">{item.category}</p>
+                              <p className="font-bold mt-1">${(item.discountPrice || item.price).toLocaleString('es-MX')} MXN</p>
+                          </div>
+                          <div className="flex items-center space-x-4">
+                              <input
+                                  type="number"
+                                  value={item.quantity}
+                                  onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
+                                  min="1"
+                                  className="w-16 border text-center rounded-md"
+                                  aria-label={`Cantidad para ${item.name}`}
+                              />
+                              <button onClick={() => removeFromCart(item.id)} className="text-gray-500 hover:text-red-500" aria-label={`Quitar ${item.name} del carrito`}>
+                                 <TrashIcon />
+                              </button>
+                          </div>
+                      </div>
+                  ))}
+              </div>
+          </div>
+          <div className="lg:col-span-1">
+              <div className="bg-white rounded-lg shadow-md p-6">
+                  <h2 className="text-xl font-bold mb-4 border-b pb-2">Resumen de Compra</h2>
+                  <div className="space-y-2">
+                      <div className="flex justify-between">
+                          <span>Subtotal</span>
+                          <span>${subtotal.toLocaleString('es-MX')} MXN</span>
+                      </div>
+                       <div className="flex justify-between">
+                          <span>Envío</span>
+                          <span>{shippingCost === 0 ? 'Gratis' : `$${shippingCost.toLocaleString('es-MX')} MXN`}</span>
+                      </div>
+                      {discount > 0 && (
+                          <div className="flex justify-between text-green-600">
+                              <span>Descuento (10%)</span>
+                              <span>-${(subtotal * discount).toLocaleString('es-MX')} MXN</span>
+                          </div>
+                      )}
+                  </div>
+                  <div className="mt-4 pt-4 border-t">
+                      <div className="flex justify-between font-bold text-lg">
+                          <span>Total</span>
+                          <span>${total.toLocaleString('es-MX')} MXN</span>
+                      </div>
+                  </div>
 
-                <div className="mt-6">
-                    <label htmlFor="coupon" className="font-semibold block mb-2">Código de Descuento</label>
-                    <div className="flex">
-                        <input
-                            type="text"
-                            id="coupon"
-                            value={coupon}
-                            onChange={(e) => setCoupon(e.target.value)}
-                            placeholder="BIENVENIDA10"
-                            className="w-full border rounded-l-md px-3 py-2"
-                        />
-                        <button onClick={handleApplyCoupon} className="bg-gray-200 text-gray-700 font-semibold px-4 rounded-r-md hover:bg-gray-300">Aplicar</button>
-                    </div>
-                </div>
+                  <div className="mt-6">
+                      <label htmlFor="coupon" className="font-semibold block mb-2">Código de Descuento</label>
+                      <div className="flex">
+                          <input
+                              type="text"
+                              id="coupon"
+                              value={coupon}
+                              onChange={(e) => setCoupon(e.target.value)}
+                              placeholder="BIENVENIDA10"
+                              className="w-full border rounded-l-md px-3 py-2"
+                          />
+                          <button onClick={handleApplyCoupon} className="bg-gray-200 text-gray-700 font-semibold px-4 rounded-r-md hover:bg-gray-300">Aplicar</button>
+                      </div>
+                  </div>
 
-                <button onClick={() => onNavigate('checkout')} className="w-full bg-black text-white font-bold py-3 mt-6 rounded-md hover:bg-gray-800 transition-colors">
-                    Proceder al Pago
-                </button>
-            </div>
+                  <button onClick={() => onNavigate('checkout')} className="w-full bg-black text-white font-bold py-3 mt-6 rounded-md hover:bg-gray-800 transition-colors">
+                      Proceder al Pago
+                  </button>
+              </div>
+          </div>
         </div>
       </div>
-    </div>
+
+      <ConfirmationDialog
+        isOpen={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        onConfirm={handleConfirmEmptyCart}
+        title="Vaciar Carrito"
+      >
+        <p>¿Estás seguro de que quieres vaciar tu carrito?</p>
+      </ConfirmationDialog>
+    </>
   );
 };
 
