@@ -78,6 +78,11 @@ const Header: React.FC<HeaderProps> = ({ onSelectCategory, onSearch, onNavigate 
         setIsMobileMenuOpen(false);
     };
 
+    const handleMobileNavigate = (page: Page) => {
+        onNavigate(page);
+        setIsMobileMenuOpen(false);
+    };
+
     const categories = ["Bolsas", "Tenis", "Sandalias", "Ropa", "Accesorios", "Suplementos", "Sets de Regalo"];
 
     return (
@@ -89,7 +94,7 @@ const Header: React.FC<HeaderProps> = ({ onSelectCategory, onSearch, onNavigate 
                 <div className="flex justify-between items-center py-4">
                     {/* Left side: Hamburger (mobile) + Logo */}
                     <div className="flex items-center space-x-4">
-                        <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden text-gray-600 hover:text-pink-500">
+                        <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden text-gray-600 hover:text-pink-500" aria-label="Abrir menú de navegación">
                             <MenuIcon />
                         </button>
                         <h1 onClick={() => onNavigate('home')} className="text-3xl md:text-4xl font-bold text-gray-800 cursor-pointer tracking-widest uppercase">
@@ -107,7 +112,7 @@ const Header: React.FC<HeaderProps> = ({ onSelectCategory, onSearch, onNavigate 
                                 placeholder="Buscar productos..."
                                 className="w-full border border-gray-300 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-pink-300"
                             />
-                            <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+                            <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" aria-label="Buscar">
                                 <SearchIcon />
                             </button>
                         </form>
@@ -137,12 +142,20 @@ const Header: React.FC<HeaderProps> = ({ onSelectCategory, onSearch, onNavigate 
                 </ul>
             </nav>
             
-            {/* Mobile Menu Overlay */}
-            {isMobileMenuOpen && (
-                <div className="fixed inset-0 bg-white z-50 flex flex-col md:hidden">
+            {/* Mobile Menu Overlay & Panel */}
+            <div className={`fixed inset-0 z-50 md:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'visible' : 'invisible'}`}>
+                {/* Overlay */}
+                <div 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`absolute inset-0 bg-black transition-opacity duration-300 ${isMobileMenuOpen ? 'bg-opacity-50' : 'bg-opacity-0'}`}
+                    aria-hidden="true"
+                ></div>
+
+                {/* Menu Panel */}
+                <div className={`relative bg-white h-full w-4/5 max-w-sm flex flex-col transition-transform duration-300 ease-in-out transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                     <div className="flex justify-between items-center p-4 border-b">
-                         <h1 onClick={() => onNavigate('home')} className="text-3xl font-bold text-gray-800 tracking-widest uppercase">LUXA</h1>
-                         <button onClick={() => setIsMobileMenuOpen(false)} className="text-gray-600">
+                         <h1 onClick={() => handleMobileNavigate('home')} className="text-3xl font-bold text-gray-800 tracking-widest uppercase cursor-pointer">LUXA</h1>
+                         <button onClick={() => setIsMobileMenuOpen(false)} className="text-gray-600" aria-label="Cerrar menú">
                              <CloseIcon />
                          </button>
                     </div>
@@ -156,13 +169,13 @@ const Header: React.FC<HeaderProps> = ({ onSelectCategory, onSearch, onNavigate 
                                 placeholder="Buscar productos..."
                                 className="w-full border border-gray-300 rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-pink-300"
                             />
-                            <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+                            <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" aria-label="Buscar">
                                 <SearchIcon />
                             </button>
                         </form>
                     </div>
 
-                    <nav className="flex-grow p-4">
+                    <nav className="flex-grow p-4 overflow-y-auto">
                         <ul className="flex flex-col space-y-6 text-lg font-semibold">
                              <li onClick={() => handleMobileLinkClick('all')} className="text-gray-700 hover:text-pink-500 cursor-pointer">Novedades</li>
                              {categories.map(cat => (
@@ -171,8 +184,24 @@ const Header: React.FC<HeaderProps> = ({ onSelectCategory, onSearch, onNavigate 
                              <li onClick={() => handleMobileLinkClick('all')} className="text-red-500 hover:text-red-700 cursor-pointer">Ofertas</li>
                         </ul>
                     </nav>
+
+                    <div className="mt-auto border-t p-4 space-y-4">
+                        <button onClick={() => handleMobileNavigate('wishlist')} className="w-full flex items-center text-lg text-gray-700 hover:text-pink-500">
+                            <HeartIcon />
+                            <span className="ml-3">Wishlist</span>
+                            {favoritesCount > 0 && <span className="ml-auto bg-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{favoritesCount}</span>}
+                        </button>
+                         <button onClick={() => handleMobileNavigate('cart')} className="w-full flex items-center text-lg text-gray-700 hover:text-pink-500">
+                            <CartIcon />
+                            <span className="ml-3">Carrito</span>
+                            {cartCount > 0 && <span className="ml-auto bg-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{cartCount}</span>}
+                        </button>
+                        <div className="pt-2">
+                             <CurrencyConverter />
+                        </div>
+                    </div>
                 </div>
-            )}
+            </div>
         </header>
     );
 };
