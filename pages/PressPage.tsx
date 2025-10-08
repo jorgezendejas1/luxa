@@ -22,7 +22,7 @@ const PressPage: React.FC = () => {
     return (
         <div className="bg-white animate-fade-in">
             <div className="relative h-64 md:h-80 bg-gray-900">
-                <img src="/img/press_1.jpg" alt="Prensa y medios" className="w-full h-full object-cover opacity-50" loading="lazy"/>
+                <img src="https://images.unsplash.com/photo-1505238680356-6678fb750953?q=80&w=1994&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Prensa y medios" className="w-full h-full object-cover opacity-50" loading="lazy"/>
                 <div className="absolute inset-0 flex items-center justify-center">
                     <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-wider text-center">Prensa</h1>
                 </div>

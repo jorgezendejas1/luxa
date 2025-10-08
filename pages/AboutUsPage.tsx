@@ -4,7 +4,7 @@ const AboutUsPage: React.FC = () => {
     return (
         <div className="bg-white animate-fade-in">
             <div className="relative h-64 md:h-80 bg-gray-900">
-                <img src="/img/about_1.jpg" alt="Equipo de LUXA trabajando" className="w-full h-full object-cover opacity-50" loading="lazy"/>
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Equipo de LUXA trabajando" className="w-full h-full object-cover opacity-50" loading="lazy"/>
                 <div className="absolute inset-0 flex items-center justify-center">
                     <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-wider text-center">Nuestra Historia</h1>
                 </div>

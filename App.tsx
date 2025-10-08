@@ -127,13 +127,18 @@ const App: React.FC = () => {
         }
     };
 
+    // Create a unique key for the main content area.
+    // When this key changes, React will re-mount the component,
+    // triggering the entry animation every time a new page is rendered.
+    const pageKey = `${page}-${selectedCategory || ''}-${searchQuery || ''}-${selectedProduct?.id || ''}`;
+
     return (
         <CurrencyProvider>
             <CartProvider>
                 <FavoritesProvider>
                     <div className="flex flex-col min-h-screen font-sans">
                         <Header onNavigate={handleNavigate} onSelectCategory={handleSelectCategory} onSearch={handleSearch} />
-                        <main className="flex-grow">
+                        <main key={pageKey} className="flex-grow">
                             {renderPage()}
                         </main>
                         <Footer onNavigate={handleNavigate} />
