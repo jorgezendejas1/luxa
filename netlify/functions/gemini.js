@@ -9,7 +9,7 @@ exports.handler = async function (event, context) {
   }
 
   try {
-    const { prompt } = JSON.parse(event.body);
+    const { prompt, systemInstruction } = JSON.parse(event.body);
 
     if (!prompt) {
       return { statusCode: 400, body: "Bad Request: se requiere un 'prompt'." };
@@ -32,6 +32,14 @@ exports.handler = async function (event, context) {
         },
       ],
     };
+
+    // Agrega la instrucción del sistema al cuerpo de la solicitud si se proporcionó.
+    // Esta es la forma recomendada de guiar al modelo.
+    if (systemInstruction) {
+        requestBody.systemInstruction = {
+            parts: [{ text: systemInstruction }],
+        };
+    }
 
     const apiResponse = await fetch(API_URL, {
       method: "POST",

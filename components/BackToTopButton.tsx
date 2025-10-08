@@ -16,8 +16,8 @@ const BackToTopButton: React.FC<BackToTopButtonProps> = ({ isVisible, onClick })
     return (
         <button
             onClick={onClick}
-            className={`fixed bottom-5 right-5 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition-opacity duration-300 z-50 ${
-                isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            className={`fixed bottom-24 right-5 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition-all duration-300 z-40 ${
+                isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-0 pointer-events-none'
             }`}
             aria-label="Volver arriba"
         >

@@ -5,6 +5,7 @@ import { FavoritesProvider } from './context/FavoritesContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import BackToTopButton from './components/BackToTopButton';
+import FashionAssistant from './components/FashionAssistant';
 import HomePage from './pages/HomePage';
 import CategoryPage from './pages/CategoryPage';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -143,6 +144,7 @@ const App: React.FC = () => {
                         </main>
                         <Footer onNavigate={handleNavigate} />
                         <BackToTopButton isVisible={showBackToTop} onClick={scrollToTop} />
+                        <FashionAssistant />
                     </div>
                 </FavoritesProvider>
             </CartProvider>
