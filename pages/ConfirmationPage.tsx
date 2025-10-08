@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Order, Page } from '../types';
 import { useCurrency } from '../context/CurrencyContext';
 
@@ -7,13 +7,58 @@ interface ConfirmationPageProps {
   onNavigate: (page: Page) => void;
 }
 
+// Declara la variable global de emailjs para que TypeScript la reconozca
+declare const emailjs: any;
+
 const ConfirmationPage: React.FC<ConfirmationPageProps> = ({ order, onNavigate }) => {
   const { convertPrice } = useCurrency();
 
+  useEffect(() => {
+    // IMPORTANTE: Reemplaza estos valores con tus propias claves de EmailJS
+    const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'; 
+    const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID'; 
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; 
+
+    // Inicializa EmailJS con tu clave pública
+    try {
+        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    
+        // Define los parámetros para tu plantilla de EmailJS
+        // Asegúrate de que tu plantilla en EmailJS use estas mismas variables (ej. {{order_id}}, {{customer_name}})
+        const templateParams = {
+            order_id: order.orderId,
+            customer_name: order.shippingAddress.name,
+            total: convertPrice(order.total),
+            shipping_address: `${order.shippingAddress.address}, ${order.shippingAddress.city}`,
+            customer_email: order.shippingAddress.email,
+        };
+    
+        // Envía el correo
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+            .then((response: any) => {
+               console.log('SUCCESS! Email de confirmación enviado.', response.status, response.text);
+            }, (error: any) => {
+               console.log('FAILED... Error al enviar el correo.', error);
+               // Si falla, muestra la simulación en la consola como respaldo
+               console.log("===================================");
+               console.log("📧 Email de confirmación (simulación por fallo en envío):");
+               console.log(`Para: ${order.shippingAddress.email}`);
+               console.log(`Asunto: ¡Gracias por tu pedido! #${order.orderId}`);
+               console.log(`Hola ${order.shippingAddress.name}, tu pedido ha sido confirmado.`);
+               console.log("===================================");
+            });
+            
+    } catch (e) {
+        console.error("Error al inicializar o usar EmailJS. ¿Incluiste el script en index.html?", e)
+    }
+
+  }, [order, convertPrice]);
+
+
   const handleMercadoPagoClick = () => {
-    // In a real application, you would generate a specific payment link.
-    // For this simulation, we'll redirect to the Mercado Pago homepage.
-    window.location.href = 'https://www.mercadopago.com.mx/';
+    // En una aplicación real, se generaría un enlace de pago específico.
+    // Para esta simulación, redirigimos a la página de inicio de Mercado Pago.
+    window.open('https://www.mercadopago.com.mx/', '_blank');
   };
 
 
@@ -23,7 +68,7 @@ const ConfirmationPage: React.FC<ConfirmationPageProps> = ({ order, onNavigate }
         <svg className="w-16 h-16 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         <h1 className="text-3xl font-bold text-gray-800 mb-2">¡Gracias por tu compra!</h1>
         <p className="text-gray-600">Tu pedido ha sido recibido y será procesado en breve.</p>
-        <p className="text-gray-600 mb-6">Recibirás una confirmación por correo electrónico.</p>
+        <p className="text-gray-600 mb-6">Se ha enviado una confirmación a <strong>{order.shippingAddress.email}</strong>.</p>
         
         <div className="text-left bg-gray-50 p-6 rounded-lg border my-8">
             <h2 className="font-bold text-lg mb-4">Resumen del Pedido</h2>

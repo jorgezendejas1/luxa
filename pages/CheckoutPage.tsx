@@ -8,14 +8,14 @@ interface CheckoutPageProps {
 }
 
 // Define field names for type safety
-type ShippingField = 'name' | 'address' | 'city' | 'state' | 'zip' | 'phone';
+type ShippingField = 'name' | 'email' | 'address' | 'city' | 'state' | 'zip' | 'phone';
 type CardField = 'cardName' | 'cardNumber' | 'expiry' | 'cvv';
 type FormField = ShippingField | CardField;
 
 // Helper function outside the component to keep it pure.
 // It takes the current state and returns an object of errors.
 const getValidationErrors = (
-  shippingInfo: { name: string, address: string, city: string, state: string, zip: string, phone: string },
+  shippingInfo: { name: string, email: string, address: string, city: string, state: string, zip: string, phone: string },
   cardInfo: { cardName: string, cardNumber: string, expiry: string, cvv: string },
   paymentMethod: string
 ): Partial<Record<FormField, string>> => {
@@ -23,6 +23,11 @@ const getValidationErrors = (
     
     // --- Shipping Validation ---
     if (!shippingInfo.name.trim()) tempErrors.name = "El nombre es requerido.";
+    if (!shippingInfo.email.trim()) {
+        tempErrors.email = "El correo electrónico es requerido.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(shippingInfo.email)) {
+        tempErrors.email = "El formato del correo electrónico no es válido.";
+    }
     if (!/^\d{10}$/.test(shippingInfo.phone.replace(/\s/g, ''))) tempErrors.phone = "El teléfono debe tener 10 dígitos.";
     if (!shippingInfo.address.trim()) tempErrors.address = "La dirección es requerida.";
     if (!shippingInfo.city.trim()) tempErrors.city = "La ciudad es requerida.";
@@ -59,7 +64,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ onPlaceOrder }) => {
   const { cartItems, clearCart } = useCart();
   const { convertPrice } = useCurrency();
   const [shippingInfo, setShippingInfo] = useState({
-    name: '', address: '', city: '', state: 'CDMX', zip: '', phone: ''
+    name: '', email: '', address: '', city: '', state: 'CDMX', zip: '', phone: ''
   });
   const [cardInfo, setCardInfo] = useState({
     cardName: '', cardNumber: '', expiry: '', cvv: ''
@@ -133,9 +138,13 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ onPlaceOrder }) => {
         <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-bold mb-4">Información de Envío</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
+            <div className="md:col-span-2">
               <input name="name" placeholder="Nombre completo" required onChange={handleInputChange} onBlur={handleBlur} value={shippingInfo.name} className={`p-2 border rounded-md w-full ${touched.name && errors.name ? 'border-red-500' : 'border-gray-300'}`} />
               {touched.name && errors.name && <p className="text-red-500 text-xs mt-1 animate-fade-in">{errors.name}</p>}
+            </div>
+            <div>
+              <input name="email" placeholder="Correo Electrónico" type="email" required onChange={handleInputChange} onBlur={handleBlur} value={shippingInfo.email} className={`p-2 border rounded-md w-full ${touched.email && errors.email ? 'border-red-500' : 'border-gray-300'}`} />
+              {touched.email && errors.email && <p className="text-red-500 text-xs mt-1 animate-fade-in">{errors.email}</p>}
             </div>
             <div>
               <input name="phone" placeholder="Teléfono" type="tel" required onChange={handleInputChange} onBlur={handleBlur} value={shippingInfo.phone} className={`p-2 border rounded-md w-full ${touched.phone && errors.phone ? 'border-red-500' : 'border-gray-300'}`} />
