@@ -5,6 +5,7 @@ import { useCurrency } from '../context/CurrencyContext';
 import { products } from '../data/products';
 import ProductCard from '../components/ProductCard';
 import Breadcrumb from '../components/Breadcrumb';
+import ImageZoomModal from '../components/ImageZoomModal';
 
 interface ProductDetailPageProps {
     product: Product;
@@ -34,6 +35,7 @@ const WhatsAppIcon = () => (
 
 const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelectProduct, onNavigate, onSelectCategory }) => {
     const [mainImage, setMainImage] = useState(product.images[0]);
+    const [isZoomModalOpen, setIsZoomModalOpen] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const { addToCart } = useCart();
     const { convertPrice } = useCurrency();
@@ -72,16 +74,23 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {/* Image Gallery */}
-                <div>
-                    <img src={mainImage} alt={product.name} className="w-full h-auto max-h-[550px] object-cover rounded-lg shadow-lg mb-4" loading="lazy" />
-                    <div className="flex space-x-2">
+                <div className="relative group">
+                    <img
+                        key={mainImage}
+                        src={mainImage}
+                        alt={product.name}
+                        onClick={() => setIsZoomModalOpen(true)}
+                        className="w-full h-auto max-h-[550px] object-cover rounded-lg shadow-lg mb-4 animate-fade-in-opacity cursor-zoom-in transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                    />
+                    <div className="flex space-x-2 overflow-x-auto py-2">
                         {product.images.map((img, index) => (
                             <img
                                 key={index}
                                 src={img}
                                 alt={`${product.name} ${index + 1}`}
                                 onClick={() => setMainImage(img)}
-                                className={`w-20 h-20 object-cover rounded-md cursor-pointer border-2 ${mainImage === img ? 'border-pink-500' : 'border-transparent'}`}
+                                className={`w-20 h-20 object-cover rounded-md cursor-pointer border-2 flex-shrink-0 ${mainImage === img ? 'border-pink-500' : 'border-transparent'}`}
                                 loading="lazy"
                             />
                         ))}
@@ -180,6 +189,11 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
                      ))}
                  </div>
             </div>
+             <ImageZoomModal 
+                isOpen={isZoomModalOpen} 
+                onClose={() => setIsZoomModalOpen(false)} 
+                imageUrl={mainImage} 
+            />
         </div>
     );
 };
