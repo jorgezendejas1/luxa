@@ -28,6 +28,8 @@ exports.handler = async function (event, context) {
     const requestBody = {
       contents: [
         {
+          // FIX: Se añade el rol 'user' para cumplir con el esquema de la API y mejorar la robustez.
+          role: "user",
           parts: [{ text: prompt }],
         },
       ],

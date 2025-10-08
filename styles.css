@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Global Styles & Base Configurations
+   ========================================================================== */
+
+/* Smooth transitions for common interactive elements for a polished feel. */
+button,
+a,
+[role="button"],
+input[type="button"],
+input[type="submit"] {
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out, transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+/* ==========================================================================
+   Keyframe Animations
+   ========================================================================== */
+
+/* Fades in content while sliding up slightly. Used for page/section transitions. */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fades in content without any movement. Used for modals or overlays. */
+@keyframes fadeInOpacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* "Pops" in an element by scaling up and fading in. Used for grid items. */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================================
+   Animation Utility Classes
+   ========================================================================== */
+
+/* Applies the fadeIn animation. */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Applies the fadeInOpacity animation. */
+.animate-fade-in-opacity {
+  animation: fadeInOpacity 0.3s ease-in-out forwards;
+}
+
+/* ==========================================================================
+   Component-Specific Styles
+   ========================================================================== */
+
+/*
+ * Staggered animation for product cards within a grid.
+ * Applies the popIn animation with a cascading delay for a visually
+ * appealing loading effect.
+ */
+.grid .group {
+  animation: popIn 0.6s ease-out backwards;
+}
+
+.grid .group:nth-child(1) { animation-delay: 0.05s; }
+.grid .group:nth-child(2) { animation-delay: 0.1s; }
+.grid .group:nth-child(3) { animation-delay: 0.15s; }
+.grid .group:nth-child(4) { animation-delay: 0.2s; }
+.grid .group:nth-child(5) { animation-delay: 0.25s; }
+.grid .group:nth-child(6) { animation-delay: 0.3s; }
+.grid .group:nth-child(7) { animation-delay: 0.35s; }
+.grid .group:nth-child(8) { animation-delay: 0.4s; }
+.grid .group:nth-child(9) { animation-delay: 0.45s; }
+.grid .group:nth-child(10) { animation-delay: 0.5s; }
+.grid .group:nth-child(11) { animation-delay: 0.55s; }
+.grid .group:nth-child(12) { animation-delay: 0.6s; }
+
+
+/* ==========================================================================
+   Cursor Utility Classes
+   ========================================================================== */
+
+/* Custom cursor for zoomable images to indicate interactivity. */
+.cursor-zoom-in {
+  cursor: zoom-in;
+}
