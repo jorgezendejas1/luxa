@@ -174,6 +174,7 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({ isOpen, onClose, images
                                     resetZoomAndPan();
                                 }}
                                 className={`w-12 h-12 md:w-16 md:h-16 object-cover rounded-md cursor-pointer border-2 flex-shrink-0 transition-all ${currentIndex === index ? 'border-pink-500 scale-110' : 'border-transparent'}`}
+                                loading="lazy"
                             />
                         ))}
                     </div>
