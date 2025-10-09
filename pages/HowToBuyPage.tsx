@@ -22,7 +22,7 @@ const HowToBuyPage: React.FC = () => {
     return (
         <div className="bg-white py-16 animate-fade-in">
             <div className="container mx-auto px-6">
-                <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-4">Comprar en LUXA es Fácil y Seguro</h1>
+                <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-4">Comprar en Pitaya Glam es Fácil y Seguro</h1>
                 <p className="text-center text-lg text-gray-600 mb-12">Sigue estos sencillos pasos para adquirir tus productos de lujo favoritos.</p>
                 <div className="max-w-2xl mx-auto">
                     <Step 

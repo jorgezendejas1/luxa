@@ -76,7 +76,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                     </div>
                 </div>
                 <div className="border-t border-gray-200 mt-10 pt-6 text-center text-sm">
-                    <p>&copy; {new Date().getFullYear()} LUXA. Todos los derechos reservados.</p>
+                    <p>&copy; {new Date().getFullYear()} Pitaya Glam. Todos los derechos reservados.</p>
                 </div>
             </div>
         </footer>

@@ -56,7 +56,7 @@ const HelpCenterPage: React.FC<HelpCenterPageProps> = ({ onNavigate }) => {
                 answer: <p>Aceptamos todas las principales tarjetas de crédito y débito (Visa, Mastercard, American Express), pagos a través de Mercado Pago y pagos en efectivo en cualquier tienda OXXO del país.</p>
             },
             {
-                question: "¿Es seguro comprar en LUXA?",
+                question: "¿Es seguro comprar en Pitaya Glam?",
                 answer: <p>¡Absolutamente! Nuestro sitio utiliza encriptación SSL para proteger todos tus datos personales y de pago. La seguridad de tu información es nuestra máxima prioridad.</p>
             }
         ],
