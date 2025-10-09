@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { products } from '../data/products';
 import { Product, Page } from '../types';
+import LazyImage from '../components/LazyImage';
 
 const CloseIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -53,7 +54,7 @@ const WishlistPage: React.FC<WishlistPageProps> = ({ onSelectProduct, onNavigate
                             <CloseIcon />
                         </button>
                         <div onClick={() => onSelectProduct(product)} className="cursor-pointer overflow-hidden">
-                            <img src={product.images[0]} alt={product.name} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
+                            <LazyImage src={product.images[0]} alt={product.name} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"/>
                         </div>
                         <div className="p-4 flex flex-col flex-grow">
                             <h3 className="text-sm font-semibold text-gray-700 truncate flex-grow cursor-pointer" onClick={() => onSelectProduct(product)}>{product.name}</h3>

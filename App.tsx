@@ -40,13 +40,13 @@ const App: React.FC = () => {
     }, []);
     
     useEffect(() => {
-        let title = 'LUXA';
+        let title = 'Pitaya Glam';
         if (page === 'category' && selectedCategory && selectedCategory !== 'all') {
-            title = `LUXA | ${selectedCategory}`;
+            title = `Pitaya Glam | ${selectedCategory}`;
         } else if (page === 'category' && searchQuery) {
-             title = `LUXA | Resultados para "${searchQuery}"`;
+             title = `Pitaya Glam | Resultados para "${searchQuery}"`;
         } else if (page === 'product' && selectedProduct) {
-            title = `LUXA | ${selectedProduct.name}`;
+            title = `Pitaya Glam | ${selectedProduct.name}`;
         }
         document.title = title;
     }, [page, selectedCategory, selectedProduct, searchQuery]);

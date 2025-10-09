@@ -3,6 +3,7 @@ import { useCart } from '../context/CartContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { Page } from '../types';
 import ConfirmationDialog from '../components/ConfirmationDialog';
+import LazyImage from '../components/LazyImage';
 
 interface CartPageProps {
   onNavigate: (page: Page) => void;
@@ -73,7 +74,7 @@ const CartPage: React.FC<CartPageProps> = ({ onNavigate }) => {
               <div className="bg-white rounded-lg shadow-md">
                   {cartItems.map(item => (
                       <div key={item.id} className="flex items-center p-4 border-b last:border-b-0">
-                          <img src={item.images[0]} alt={item.name} className="w-24 h-24 object-cover rounded-md" loading="lazy" />
+                          <LazyImage src={item.images[0]} alt={item.name} className="w-24 h-24 object-cover rounded-md" />
                           <div className="flex-grow ml-4">
                               <h2 className="font-semibold">{item.name}</h2>
                               <p className="text-sm text-gray-500">{item.category}</p>

@@ -8,7 +8,7 @@ const ReturnsPage: React.FC = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="p-8 border rounded-lg mb-8 bg-pink-50">
                          <p className="text-lg text-center mb-4">
-                           En LUXA, tu satisfacción es nuestra prioridad. Si no estás completamente satisfecho con tu compra, estamos aquí para ayudarte.
+                           En Pitaya Glam, tu satisfacción es nuestra prioridad. Si no estás completamente satisfecho con tu compra, estamos aquí para ayudarte.
                         </p>
                          <h2 className="text-2xl font-bold text-gray-800 mb-4">Plazo de Devolución</h2>
                         <p>
@@ -28,7 +28,7 @@ const ReturnsPage: React.FC = () => {
                     <h2 className="text-3xl font-bold text-gray-800 mb-6">Proceso de Devolución</h2>
                      <ol className="list-decimal list-inside space-y-4">
                         <li>
-                            <strong>Inicia la solicitud:</strong> Envía un correo electrónico a <a href="mailto:devoluciones@luxa.com" className="text-pink-600 font-semibold">devoluciones@luxa.com</a> con tu número de pedido y el motivo de la devolución.
+                            <strong>Inicia la solicitud:</strong> Envía un correo electrónico a <a href="mailto:devoluciones@pitayaglam.com" className="text-pink-600 font-semibold">devoluciones@pitayaglam.com</a> con tu número de pedido y el motivo de la devolución.
                         </li>
                         <li>
                            <strong>Recibe tu guía de envío:</strong> Nuestro equipo revisará tu solicitud. Si cumple con las condiciones, te enviaremos una guía de envío prepagada para que nos hagas llegar el producto.
@@ -45,7 +45,7 @@ const ReturnsPage: React.FC = () => {
                     </ol>
 
                      <div className="mt-10 p-6 bg-yellow-100 border border-yellow-300 rounded-md text-yellow-800">
-                        <strong>Nota Importante:</strong> El costo del envío original no es reembolsable. LUXA cubrirá el costo del envío de la devolución.
+                        <strong>Nota Importante:</strong> El costo del envío original no es reembolsable. Pitaya Glam cubrirá el costo del envío de la devolución.
                     </div>
                 </div>
             </div>

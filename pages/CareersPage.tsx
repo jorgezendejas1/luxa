@@ -1,4 +1,5 @@
 import React from 'react';
+import LazyImage from '../components/LazyImage';
 
 const CareersPage: React.FC = () => {
     const openPositions = [
@@ -11,7 +12,7 @@ const CareersPage: React.FC = () => {
     return (
         <div className="bg-white animate-fade-in">
             <div className="relative h-64 md:h-80 bg-gray-900">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Equipo colaborando" className="w-full h-full object-cover opacity-50" loading="lazy"/>
+                <LazyImage src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Equipo colaborando" className="w-full h-full object-cover opacity-50"/>
                 <div className="absolute inset-0 flex items-center justify-center">
                     <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-wider text-center">Únete a Nuestro Equipo</h1>
                 </div>
@@ -19,7 +20,7 @@ const CareersPage: React.FC = () => {
             
             <div className="container mx-auto px-6 py-16 text-gray-700">
                 <div className="max-w-4xl mx-auto">
-                    <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">Trabaja en LUXA</h2>
+                    <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">Trabaja en Pitaya Glam</h2>
                     <p className="text-xl text-center mb-12">
                         Somos un equipo dinámico, innovador y apasionado por la moda y la tecnología. Si quieres ser parte de la revolución del e-commerce de lujo en México, este es tu lugar.
                     </p>
@@ -51,7 +52,7 @@ const CareersPage: React.FC = () => {
                         ))}
                     </div>
                      <p className="text-center mt-12">
-                        ¿No ves una posición que se ajuste a tu perfil? Envíanos tu CV a <a href="mailto:talento@luxa.com" className="text-pink-600 font-semibold">talento@luxa.com</a>. ¡Siempre estamos buscando gente increíble!
+                        ¿No ves una posición que se ajuste a tu perfil? Envíanos tu CV a <a href="mailto:talento@pitayaglam.com" className="text-pink-600 font-semibold">talento@pitayaglam.com</a>. ¡Siempre estamos buscando gente increíble!
                     </p>
                 </div>
             </div>

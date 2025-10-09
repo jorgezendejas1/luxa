@@ -1,20 +1,21 @@
 import React from 'react';
+import LazyImage from '../components/LazyImage';
 
 const PressPage: React.FC = () => {
     const pressReleases = [
         {
             date: '15 de Julio, 2024',
-            title: 'LUXA Lanza su Plataforma E-commerce para Revolucionar el Mercado de Lujo en México',
+            title: 'Pitaya Glam Lanza su Plataforma E-commerce para Revolucionar el Mercado de Lujo en México',
             link: '#'
         },
         {
             date: '1 de Agosto, 2024',
-            title: 'LUXA Anuncia Colaboraciones Exclusivas con Marcas de Diseñador Internacionales',
+            title: 'Pitaya Glam Anuncia Colaboraciones Exclusivas con Marcas de Diseñador Internacionales',
             link: '#'
         },
         {
             date: '20 de Agosto, 2024',
-            title: 'Reporte de Tendencias de LUXA: Lo que Viene para la Temporada Otoño/Invierno',
+            title: 'Reporte de Tendencias de Pitaya Glam: Lo que Viene para la Temporada Otoño/Invierno',
             link: '#'
         }
     ];
@@ -22,7 +23,7 @@ const PressPage: React.FC = () => {
     return (
         <div className="bg-white animate-fade-in">
             <div className="relative h-64 md:h-80 bg-gray-900">
-                <img src="https://images.unsplash.com/photo-1505238680356-6678fb750953?q=80&w=1994&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Prensa y medios" className="w-full h-full object-cover opacity-50" loading="lazy"/>
+                <LazyImage src="https://images.unsplash.com/photo-1505238680356-6678fb750953?q=80&w=1994&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Prensa y medios" className="w-full h-full object-cover opacity-50"/>
                 <div className="absolute inset-0 flex items-center justify-center">
                     <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-wider text-center">Prensa</h1>
                 </div>
@@ -48,8 +49,8 @@ const PressPage: React.FC = () => {
                             <p className="mb-4">
                                 Para todas las consultas de prensa, entrevistas, o solicitudes de imágenes de alta resolución, por favor contacta a nuestro equipo de relaciones públicas.
                             </p>
-                            <p className="font-semibold">Equipo de Prensa LUXA</p>
-                            <a href="mailto:prensa@luxa.com" className="text-pink-600 break-words">prensa@luxa.com</a>
+                            <p className="font-semibold">Equipo de Prensa Pitaya Glam</p>
+                            <a href="mailto:prensa@pitayaglam.com" className="text-pink-600 break-words">prensa@pitayaglam.com</a>
                             <p className="mt-4">+52 55 1234 5678</p>
                         </div>
                     </div>

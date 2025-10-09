@@ -6,6 +6,7 @@ import { products } from '../data/products';
 import ProductCard from '../components/ProductCard';
 import Breadcrumb from '../components/Breadcrumb';
 import ImageZoomModal from '../components/ImageZoomModal';
+import LazyImage from '../components/LazyImage';
 
 interface ProductDetailPageProps {
     product: Product;
@@ -53,7 +54,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
     };
 
     const productUrl = window.location.href;
-    const shareText = `¡Mira este increíble producto de LUXA: ${product.name}!`;
+    const shareText = `¡Mira este increíble producto de Pitaya Glam: ${product.name}!`;
     const encodedUrl = encodeURIComponent(productUrl);
     const encodedText = encodeURIComponent(shareText);
 
@@ -77,23 +78,21 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {/* Image Gallery */}
                 <div className="relative group">
-                    <img
+                    <LazyImage
                         key={mainImage}
                         src={mainImage}
                         alt={product.name}
                         onClick={() => setIsGalleryOpen(true)}
                         className="w-full h-auto max-h-[550px] object-cover rounded-lg shadow-lg mb-4 animate-fade-in-opacity cursor-zoom-in transition-transform duration-300 group-hover:scale-105"
-                        loading="lazy"
                     />
                     <div className="flex space-x-2 overflow-x-auto py-2">
                         {product.images.map((img, index) => (
-                            <img
+                            <LazyImage
                                 key={index}
                                 src={img}
                                 alt={`${product.name} ${index + 1}`}
                                 onClick={() => setActiveImageIndex(index)}
                                 className={`w-20 h-20 object-cover rounded-md cursor-pointer border-2 flex-shrink-0 transition-all ${activeImageIndex === index ? 'border-pink-500 scale-105' : 'border-transparent hover:border-gray-300'}`}
-                                loading="lazy"
                             />
                         ))}
                     </div>

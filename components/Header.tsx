@@ -97,8 +97,8 @@ const Header: React.FC<HeaderProps> = ({ onSelectCategory, onSearch, onNavigate 
                         <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden text-gray-600 hover:text-pink-500" aria-label="Abrir menú de navegación">
                             <MenuIcon />
                         </button>
-                        <h1 onClick={() => onNavigate('home')} className="text-3xl md:text-4xl font-bold text-gray-800 cursor-pointer tracking-widest uppercase">
-                            LUXA
+                        <h1 onClick={() => onNavigate('home')} className="text-2xl md:text-3xl font-bold text-gray-800 cursor-pointer uppercase">
+                            Pitaya Glam
                         </h1>
                     </div>
                     
@@ -154,7 +154,7 @@ const Header: React.FC<HeaderProps> = ({ onSelectCategory, onSearch, onNavigate 
                 {/* Menu Panel */}
                 <div className={`relative bg-white h-full w-4/5 max-w-sm flex flex-col transition-transform duration-300 ease-in-out transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                     <div className="flex justify-between items-center p-4 border-b">
-                         <h1 onClick={() => handleMobileNavigate('home')} className="text-3xl font-bold text-gray-800 tracking-widest uppercase cursor-pointer">LUXA</h1>
+                         <h1 onClick={() => handleMobileNavigate('home')} className="text-2xl font-bold text-gray-800 uppercase cursor-pointer">Pitaya Glam</h1>
                          <button onClick={() => setIsMobileMenuOpen(false)} className="text-gray-600" aria-label="Cerrar menú">
                              <CloseIcon />
                          </button>

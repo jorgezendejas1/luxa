@@ -38,7 +38,7 @@ const ShippingPage: React.FC = () => {
                             <li>Los días hábiles no incluyen fines de semana ni días festivos.</li>
                             <li>No nos hacemos responsables por retrasos causados por la paquetería o por información de envío incorrecta proporcionada por el cliente.</li>
                              <li>Es responsabilidad del cliente proporcionar una dirección de entrega completa y correcta.</li>
-                             <li>Si tienes alguna pregunta sobre tu envío, no dudes en contactar a nuestro equipo de <a href="mailto:soporte@luxa.com" className="text-pink-600 font-semibold">atención al cliente</a>.</li>
+                             <li>Si tienes alguna pregunta sobre tu envío, no dudes en contactar a nuestro equipo de <a href="mailto:soporte@pitayaglam.com" className="text-pink-600 font-semibold">atención al cliente</a>.</li>
                         </ul>
                     </div>
                 </div>

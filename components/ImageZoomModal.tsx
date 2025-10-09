@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import LazyImage from './LazyImage';
 
 // Icons
 const CloseIcon = () => (
@@ -165,7 +166,7 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({ isOpen, onClose, images
                 <div className="absolute bottom-4 w-full flex justify-center z-[60]">
                     <div className="flex space-x-2 p-2 bg-gray-800 bg-opacity-70 rounded-full overflow-x-auto">
                         {images.map((img, index) => (
-                            <img
+                            <LazyImage
                                 key={index}
                                 src={img}
                                 alt={`Thumbnail ${index + 1}`}
@@ -174,7 +175,6 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({ isOpen, onClose, images
                                     resetZoomAndPan();
                                 }}
                                 className={`w-12 h-12 md:w-16 md:h-16 object-cover rounded-md cursor-pointer border-2 flex-shrink-0 transition-all ${currentIndex === index ? 'border-pink-500 scale-110' : 'border-transparent'}`}
-                                loading="lazy"
                             />
                         ))}
                     </div>

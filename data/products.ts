@@ -155,7 +155,7 @@ export const products: Product[] = [
     rating: 4.6,
     reviews: [],
     stock: 40,
-    brand: "LUXA",
+    brand: "Pitaya Glam",
     colors: ["Negro"],
     sizes: ["23 MX", "24 MX", "25 MX", "26 MX"],
   },
