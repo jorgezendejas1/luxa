@@ -34,8 +34,8 @@ const WhatsAppIcon = () => (
 
 
 const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelectProduct, onNavigate, onSelectCategory }) => {
-    const [mainImage, setMainImage] = useState(product.images[0]);
-    const [isZoomModalOpen, setIsZoomModalOpen] = useState(false);
+    const [activeImageIndex, setActiveImageIndex] = useState(0);
+    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const { addToCart } = useCart();
     const { convertPrice } = useCurrency();
@@ -66,6 +66,8 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
         { name: product.category, onClick: () => onSelectCategory(product.category) },
         { name: product.name }
     ];
+    
+    const mainImage = product.images[activeImageIndex];
 
     return (
         <div className="container mx-auto px-4 py-10 animate-fade-in">
@@ -79,7 +81,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
                         key={mainImage}
                         src={mainImage}
                         alt={product.name}
-                        onClick={() => setIsZoomModalOpen(true)}
+                        onClick={() => setIsGalleryOpen(true)}
                         className="w-full h-auto max-h-[550px] object-cover rounded-lg shadow-lg mb-4 animate-fade-in-opacity cursor-zoom-in transition-transform duration-300 group-hover:scale-105"
                         loading="lazy"
                     />
@@ -89,8 +91,8 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
                                 key={index}
                                 src={img}
                                 alt={`${product.name} ${index + 1}`}
-                                onClick={() => setMainImage(img)}
-                                className={`w-20 h-20 object-cover rounded-md cursor-pointer border-2 flex-shrink-0 ${mainImage === img ? 'border-pink-500' : 'border-transparent'}`}
+                                onClick={() => setActiveImageIndex(index)}
+                                className={`w-20 h-20 object-cover rounded-md cursor-pointer border-2 flex-shrink-0 transition-all ${activeImageIndex === index ? 'border-pink-500 scale-105' : 'border-transparent hover:border-gray-300'}`}
                                 loading="lazy"
                             />
                         ))}
@@ -190,9 +192,10 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onSelect
                  </div>
             </div>
              <ImageZoomModal 
-                isOpen={isZoomModalOpen} 
-                onClose={() => setIsZoomModalOpen(false)} 
-                imageUrl={mainImage} 
+                isOpen={isGalleryOpen} 
+                onClose={() => setIsGalleryOpen(false)} 
+                images={product.images} 
+                startIndex={activeImageIndex}
             />
         </div>
     );

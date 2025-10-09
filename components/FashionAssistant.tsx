@@ -136,7 +136,6 @@ const FashionAssistant: React.FC = () => {
                     </form>
                 </footer>
             </div>
-{/* FIX: Close the React Fragment correctly. */}
         </>
     );
 };
